@@ -1,0 +1,15 @@
+
+{
+  "schemaVersion":"1.0",
+  "locale":"zh-CN",
+  "generatedAt":"2025-12-25T15:18:34+08:00",
+  "report":{
+    "coverTitle":"松弛感玩家·新春假期",
+    "nickname":"松弛感玩家",
+    "activities":["宅家充电：追剧配零食，舒服到不想动","小区散步打卡：把晚风和灯笼记下来","整理相册：把今年的年味好好封存"],
+    "persona":{"mbti":"NA","reason":""},
+    "keywords":[{"text":"松弛","tone":"slate"},{"text":"年味","tone":"red"},{"text":"充电","tone":"blue"}],
+    "wish":"愿你把舒服当成一种能力：忙时稳住节奏，闲时收集快乐；新的一年，保持松弛也保持热爱。",
+    "signature":"AI 春节报告 · 仅供分享"
+  }
+}
