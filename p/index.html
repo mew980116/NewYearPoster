@@ -1,0 +1,520 @@
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>新春假期海报</title>
+
+  <style>
+    :root{
+      --bg1:#07070b;
+      --bg2:#0b0b10;
+
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(0,0,0,.14);
+      --border: rgba(255,255,255,.14);
+
+      --text: rgba(255,255,255,.92);
+      --text2: rgba(255,255,255,.78);
+      --muted: rgba(255,255,255,.62);
+
+      --radius: 22px;
+      --radius-sm: 16px;
+      --shadow: 0 18px 46px rgba(0,0,0,.40);
+
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+              "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+
+      /* 预览宽度（手机竖屏友好） */
+      --w: 420px;
+    }
+
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg1:#fff3ef;
+        --bg2:#fff8f5;
+        --card: rgba(255,255,255,.90);
+        --card2: rgba(255,255,255,.76);
+        --border: rgba(30,18,10,.10);
+
+        --text: rgba(30,18,10,.92);
+        --text2: rgba(30,18,10,.78);
+        --muted: rgba(30,18,10,.56);
+
+        --shadow: 0 18px 46px rgba(30,18,10,.10);
+      }
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(900px 600px at 18% -10%, rgba(255,59,48,.20), transparent 55%),
+        radial-gradient(900px 600px at 90% 0%, rgba(255,204,102,.22), transparent 55%),
+        radial-gradient(900px 700px at 30% 110%, rgba(175,82,222,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding: calc(env(safe-area-inset-top) + 16px) 12px calc(env(safe-area-inset-bottom) + 18px);
+      overflow-x:hidden;
+    }
+
+    .wrap{
+      width: min(var(--w), 100%);
+      display: grid;
+      gap: 12px;
+    }
+
+    .poster{
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(560px 420px at 18% 0%, rgba(255,59,48,.18), transparent 55%),
+        radial-gradient(520px 460px at 92% 4%, rgba(255,204,102,.20), transparent 60%),
+        radial-gradient(520px 520px at 25% 105%, rgba(70,140,255,.10), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.10));
+      padding: 18px 16px 14px;
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .header{
+      position: relative;
+      border-radius: 22px;
+      padding: 14px 14px;
+      background: linear-gradient(145deg, rgba(255,59,48,.18), rgba(255,204,102,.10));
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .toprow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.14);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      font-size: 12px;
+      backdrop-filter: blur(10px);
+    }
+
+    .logo{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display:grid;
+      place-items:center;
+      font-weight: 900;
+      letter-spacing: .5px;
+      color: rgba(255,255,255,.92);
+      background: radial-gradient(circle at 30% 30%, rgba(255,204,102,.95), rgba(255,59,48,.92));
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 12px 20px rgba(0,0,0,.18);
+      user-select:none;
+    }
+
+    .coverTitle{
+      position: relative;
+      margin: 10px 0 0;
+      font-size: 26px;
+      line-height: 1.15;
+      letter-spacing: .2px;
+      color: var(--text);
+      word-break: break-word;
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 12px;
+      backdrop-filter: blur(12px);
+    }
+
+    h3{
+      margin: 0 0 10px;
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text);
+      letter-spacing: .2px;
+    }
+
+    .tag{
+      font-size: 12px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.12);
+      color: var(--muted);
+      flex: 0 0 auto;
+    }
+
+    .acts{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display:grid;
+      gap: 8px;
+    }
+
+    .act{
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 10px;
+      display:grid;
+      grid-template-columns: 12px 1fr;
+      gap: 10px;
+      align-items:start;
+    }
+
+    .dot{
+      margin-top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,204,102,.95), rgba(255,59,48,.90));
+      box-shadow: 0 0 0 4px rgba(255,204,102,.12);
+    }
+
+    .act p{
+      margin: 0;
+      color: var(--text2);
+      line-height: 1.45;
+      font-size: 13px;
+      word-break: break-word;
+    }
+
+    .persona{
+      display:grid;
+      grid-template-columns: 72px 1fr;
+      gap: 10px;
+      align-items:start;
+    }
+
+    .mbti{
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      display:grid;
+      place-items:center;
+      font-weight: 900;
+      letter-spacing: .6px;
+      border: 1px solid var(--border);
+      color: rgba(10,10,14,.92);
+      box-shadow: 0 12px 24px rgba(0,0,0,.12);
+      user-select: none;
+    }
+
+    .mbti--green{
+      background: radial-gradient(circle at 30% 30%, rgba(146,255,191,1), rgba(52,199,89,.90));
+      border-color: rgba(52,199,89,.26);
+    }
+    .mbti--purple{
+      background: radial-gradient(circle at 30% 30%, rgba(223,179,255,1), rgba(175,82,222,.92));
+      border-color: rgba(175,82,222,.26);
+    }
+    .mbti--yellow{
+      background: radial-gradient(circle at 30% 30%, rgba(255,238,170,1), rgba(255,204,102,.95));
+      border-color: rgba(255,204,102,.30);
+    }
+    .mbti--blue{
+      background: radial-gradient(circle at 30% 30%, rgba(185,220,255,1), rgba(70,140,255,.92));
+      border-color: rgba(70,140,255,.26);
+    }
+    .mbti--slate{
+      background: radial-gradient(circle at 30% 30%, rgba(220,220,220,1), rgba(150,150,160,.85));
+      border-color: rgba(255,255,255,.14);
+      color: rgba(10,10,14,.86);
+    }
+
+    .reason{
+      margin: 0;
+      color: var(--text2);
+      line-height: 1.5;
+      font-size: 12.8px;
+      word-break: break-word;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color: var(--text2);
+      font-size: 12.5px;
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+    }
+
+    .chip--red{ background: rgba(255,59,48,.12); border-color: rgba(255,59,48,.26); color: var(--text); }
+    .chip--gold{ background: rgba(255,204,102,.16); border-color: rgba(255,204,102,.30); color: var(--text); }
+    .chip--green{ background: rgba(52,199,89,.12); border-color: rgba(52,199,89,.26); color: var(--text); }
+    .chip--blue{ background: rgba(70,140,255,.12); border-color: rgba(70,140,255,.26); color: var(--text); }
+    .chip--purple{ background: rgba(175,82,222,.12); border-color: rgba(175,82,222,.26); color: var(--text); }
+
+    /* 保持原样：slate 不再继续动 */
+    .chip--slate{ background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.14); color: var(--text2); }
+
+    .wish{
+      margin: 0;
+      padding: 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--card2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wish p{
+      margin: 0 0 8px;
+      color: var(--text);
+      font-size: 13.5px;
+      line-height: 1.55;
+      word-break: break-word;
+    }
+
+    .wish footer{
+      color: var(--muted);
+      font-size: 12px;
+      display:flex;
+      justify-content:flex-end;
+      gap: 6px;
+      align-items:baseline;
+    }
+
+    .name{
+      color: var(--text2);
+      font-weight: 700;
+    }
+
+    .foot{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 11px;
+      padding-top: 4px;
+    }
+
+    .nojs{
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .is-hidden{ display:none !important; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <noscript>
+      <div class="nojs">你的浏览器禁用了 JavaScript，因此无法把 JSON 渲染到页面。请开启 JS 或换浏览器。</div>
+    </noscript>
+
+    <article class="poster" id="poster">
+      <section aria-label="封面" class="header">
+        <div class="toprow">
+          <span class="pill">新春假期</span>
+          <div class="logo" aria-hidden="true">福</div>
+        </div>
+        <h1 class="coverTitle" data-bind="coverTitle">爱记录的你·新春假期</h1>
+      </section>
+
+      <section aria-label="假期活动报告" class="card">
+        <h3>
+          <span>假期活动</span>
+          <span class="tag">HIGHLIGHTS</span>
+        </h3>
+        <ul class="acts" data-bind="activities"></ul>
+      </section>
+
+      <section aria-label="过年人格" class="card" id="personaCard">
+        <h3>
+          <span>过年人格</span>
+          <span class="tag">MBTI</span>
+        </h3>
+        <div class="persona">
+          <div class="mbti mbti--slate" data-bind="mbti">ENFP</div>
+          <p class="reason" data-bind="reason">ENFP「竞选者」热情有创意、爱分享，春节里你主动带动气氛、记录年味，把相聚变成高光瞬间。</p>
+        </div>
+      </section>
+
+      <section aria-label="过年关键词" class="card">
+        <h3>
+          <span>过年关键词</span>
+          <span class="tag">TOP 3</span>
+        </h3>
+        <div class="chips" data-bind="keywords"></div>
+      </section>
+
+      <section aria-label="新年寄语" class="wish">
+        <p data-bind="wish">愿你新的一年，把热爱落地，把日子过得有光有盼。</p>
+        <footer>—— 送给 <span class="name" data-bind="nickname">爱记录的你</span></footer>
+      </section>
+
+      <div class="foot">
+        <span data-bind="signature">AI 春节报告 · 仅供分享</span>
+        <span data-bind="generatedAtLabel">生成于 2025-12-25</span>
+      </div>
+    </article>
+  </div>
+
+  <script id="report-data" type="application/json">
+{"schemaVersion":"1.0","locale":"zh-CN","generatedAt":"2025-12-25T11:58:00Z","report":{"coverTitle":"热闹与松弛·新春假期","nickname":"年味收集员","activities":["去看烟花灯会或逛庙会，走进人间热闹里","给自己买一件新年礼物，认真犒劳这一年","安排半天断网清理房间，让生活重新变清爽"],"persona":{"mbti":"ISFJ","reason":"ISFJ「守卫者」把新年过得踏实又温暖：你愿意走进灯会庙会感受热闹，也懂得用一份新年礼物好好奖励自己；再用断网整理把空间收拾清爽，让新的一年从秩序与松弛开始。"},"keywords":[{"text":"灯会庙会","tone":"red"},{"text":"新年礼物","tone":"gold"},{"text":"断网整理","tone":"slate"}],"wish":"愿你新年既有热闹可奔赴，也有清爽可安放；把自己照顾好，把日子整理顺，把喜欢与期待都留在路上，开年顺遂又自在。","signature":"AI 春节报告 · 仅供分享"}}
+
+  </script>
+
+  <script>
+    const $ = (s) => document.querySelector(s);
+    const ALLOWED_TONES = new Set(["red","gold","green","blue","purple","slate"]);
+
+    function normalizeTone(tone){
+      const t = String(tone || "").trim().toLowerCase();
+      return ALLOWED_TONES.has(t) ? t : "slate";
+    }
+
+    function mbtiColorClass(mbti){
+      const m = String(mbti || "").trim().toUpperCase();
+      const green = new Set(["ENFJ","ENFP","INFJ","INFP"]);
+      const purple = new Set(["ENTJ","ENTP","INTJ","INTP"]);
+      const yellow = new Set(["ESFP","ESTP","ISFP","ISTP"]);
+      const blue = new Set(["ESFJ","ESTJ","ISFJ","ISTJ"]);
+      if (green.has(m)) return "mbti--green";
+      if (purple.has(m)) return "mbti--purple";
+      if (yellow.has(m)) return "mbti--yellow";
+      if (blue.has(m)) return "mbti--blue";
+      return "mbti--slate";
+    }
+
+    function formatDateLabel(iso){
+      try{
+        const d = new Date(iso);
+        if (Number.isNaN(d.getTime())) return "";
+        const y = d.getFullYear();
+        const m = String(d.getMonth()+1).padStart(2,"0");
+        const day = String(d.getDate()).padStart(2,"0");
+        return `生成于 ${y}-${m}-${day}`;
+      }catch{ return ""; }
+    }
+
+    function bindText(key, value){
+      document.querySelectorAll(`[data-bind="${key}"]`).forEach(el => {
+        el.textContent = String(value ?? "");
+      });
+    }
+
+    function renderActivities(list){
+      const el = document.querySelector('[data-bind="activities"]');
+      if (!el) return;
+      el.innerHTML = "";
+      (list || []).slice(0,3).forEach(t => {
+        const li = document.createElement("li");
+        li.className = "act";
+        const dot = document.createElement("span");
+        dot.className = "dot";
+        dot.setAttribute("aria-hidden", "true");
+        const p = document.createElement("p");
+        p.textContent = String(t ?? "");
+        li.append(dot, p);
+        el.appendChild(li);
+      });
+    }
+
+    function renderKeywords(list){
+      const el = document.querySelector('[data-bind="keywords"]');
+      if (!el) return;
+      el.innerHTML = "";
+      (list || []).slice(0,3).forEach(item => {
+        let text, tone;
+        if (typeof item === "string"){
+          text = item;
+          tone = "slate";
+        } else {
+          text = item?.text ?? "";
+          tone = normalizeTone(item?.tone);
+        }
+        const span = document.createElement("span");
+        span.className = `chip chip--${tone}`;
+        span.textContent = String(text ?? "");
+        el.appendChild(span);
+      });
+    }
+
+    function renderMbti(mbti){
+      const card = document.getElementById("personaCard");
+      const el = document.querySelector('[data-bind="mbti"]');
+      const m = String(mbti || "").trim().toUpperCase();
+
+      if (!m || m === "NA"){
+        if (card) card.classList.add("is-hidden");
+        return;
+      }
+
+      if (card) card.classList.remove("is-hidden");
+      if (!el) return;
+
+      el.textContent = m;
+      el.classList.remove("mbti--green","mbti--purple","mbti--yellow","mbti--blue","mbti--slate");
+      el.classList.add(mbtiColorClass(m));
+    }
+
+    function render(data){
+      const r = data?.report || {};
+      const p = r.persona || {};
+
+      bindText("coverTitle", r.coverTitle ?? "");
+      bindText("nickname", r.nickname ?? "");
+      bindText("wish", r.wish ?? "");
+      bindText("reason", p.reason ?? "");
+      bindText("signature", r.signature ?? "");
+      bindText("generatedAtLabel", formatDateLabel(data?.generatedAt));
+
+      renderActivities(r.activities);
+      renderKeywords(r.keywords);
+      renderMbti(p.mbti);
+    }
+
+    try{
+      const data = JSON.parse($("#report-data").textContent);
+      render(data);
+    }catch(e){
+      console.error("JSON 解析失败：", e);
+    }
+  </script>
+</body>
+</html>
