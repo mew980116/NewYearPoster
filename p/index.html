@@ -4,9 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>新春假期海报</title>
+  <title>春节海报</title>
 
-  <style>
+  <!-- 复制你的 index-v2 <style> 整段到这里（省略） -->
+<style>
     :root{
       --bg1:#07070b;
       --bg2:#0b0b10;
@@ -338,66 +339,48 @@
 
     .is-hidden{ display:none !important; }
   </style>
-</head>
 
+</head>
 <body>
   <div class="wrap">
-    <noscript>
-      <div class="nojs">你的浏览器禁用了 JavaScript，因此无法把 JSON 渲染到页面。请开启 JS 或换浏览器。</div>
-    </noscript>
-
     <article class="poster" id="poster">
-      <section aria-label="封面" class="header">
+      <section class="header">
         <div class="toprow">
           <span class="pill">新春假期</span>
           <div class="logo" aria-hidden="true">福</div>
         </div>
-        <h1 class="coverTitle" data-bind="coverTitle">爱记录的你·新春假期</h1>
+        <h1 class="coverTitle" data-bind="coverTitle"></h1>
       </section>
 
-      <section aria-label="假期活动报告" class="card">
-        <h3>
-          <span>假期活动</span>
-          <span class="tag">HIGHLIGHTS</span>
-        </h3>
+      <section class="card">
+        <h3><span>假期活动</span><span class="tag">HIGHLIGHTS</span></h3>
         <ul class="acts" data-bind="activities"></ul>
       </section>
 
-      <section aria-label="过年人格" class="card" id="personaCard">
-        <h3>
-          <span>过年人格</span>
-          <span class="tag">MBTI</span>
-        </h3>
+      <section class="card" id="personaCard">
+        <h3><span>过年人格</span><span class="tag">MBTI</span></h3>
         <div class="persona">
-          <div class="mbti mbti--slate" data-bind="mbti">ENFP</div>
-          <p class="reason" data-bind="reason">ENFP「竞选者」热情有创意、爱分享，春节里你主动带动气氛、记录年味，把相聚变成高光瞬间。</p>
+          <div class="mbti mbti--slate" data-bind="mbti"></div>
+          <p class="reason" data-bind="reason"></p>
         </div>
       </section>
 
-      <section aria-label="过年关键词" class="card">
-        <h3>
-          <span>过年关键词</span>
-          <span class="tag">TOP 3</span>
-        </h3>
+      <section class="card">
+        <h3><span>过年关键词</span><span class="tag">TOP 3</span></h3>
         <div class="chips" data-bind="keywords"></div>
       </section>
 
-      <section aria-label="新年寄语" class="wish">
-        <p data-bind="wish">愿你新的一年，把热爱落地，把日子过得有光有盼。</p>
-        <footer>—— 送给 <span class="name" data-bind="nickname">爱记录的你</span></footer>
+      <section class="wish">
+        <p data-bind="wish"></p>
+        <footer>—— 送给 <span class="name" data-bind="nickname"></span></footer>
       </section>
 
       <div class="foot">
-        <span data-bind="signature">AI 春节报告 · 仅供分享</span>
-        <span data-bind="generatedAtLabel">生成于 2025-12-25</span>
+        <span data-bind="signature"></span>
+        <span data-bind="generatedAtLabel"></span>
       </div>
     </article>
   </div>
-
-  <script id="report-data" type="application/json">
-{"schemaVersion":"1.0","locale":"zh-CN","generatedAt":"2025-12-25T11:58:00Z","report":{"coverTitle":"热闹与松弛·新春假期","nickname":"年味收集员","activities":["去看烟花灯会或逛庙会，走进人间热闹里","给自己买一件新年礼物，认真犒劳这一年","安排半天断网清理房间，让生活重新变清爽"],"persona":{"mbti":"ISFJ","reason":"ISFJ「守卫者」把新年过得踏实又温暖：你愿意走进灯会庙会感受热闹，也懂得用一份新年礼物好好奖励自己；再用断网整理把空间收拾清爽，让新的一年从秩序与松弛开始。"},"keywords":[{"text":"灯会庙会","tone":"red"},{"text":"新年礼物","tone":"gold"},{"text":"断网整理","tone":"slate"}],"wish":"愿你新年既有热闹可奔赴，也有清爽可安放；把自己照顾好，把日子整理顺，把喜欢与期待都留在路上，开年顺遂又自在。","signature":"AI 春节报告 · 仅供分享"}}
-
-  </script>
 
   <script>
     const $ = (s) => document.querySelector(s);
@@ -407,20 +390,6 @@
       const t = String(tone || "").trim().toLowerCase();
       return ALLOWED_TONES.has(t) ? t : "slate";
     }
-
-    function mbtiColorClass(mbti){
-      const m = String(mbti || "").trim().toUpperCase();
-      const green = new Set(["ENFJ","ENFP","INFJ","INFP"]);
-      const purple = new Set(["ENTJ","ENTP","INTJ","INTP"]);
-      const yellow = new Set(["ESFP","ESTP","ISFP","ISTP"]);
-      const blue = new Set(["ESFJ","ESTJ","ISFJ","ISTJ"]);
-      if (green.has(m)) return "mbti--green";
-      if (purple.has(m)) return "mbti--purple";
-      if (yellow.has(m)) return "mbti--yellow";
-      if (blue.has(m)) return "mbti--blue";
-      return "mbti--slate";
-    }
-
     function formatDateLabel(iso){
       try{
         const d = new Date(iso);
@@ -431,13 +400,11 @@
         return `生成于 ${y}-${m}-${day}`;
       }catch{ return ""; }
     }
-
     function bindText(key, value){
       document.querySelectorAll(`[data-bind="${key}"]`).forEach(el => {
         el.textContent = String(value ?? "");
       });
     }
-
     function renderActivities(list){
       const el = document.querySelector('[data-bind="activities"]');
       if (!el) return;
@@ -454,45 +421,30 @@
         el.appendChild(li);
       });
     }
-
     function renderKeywords(list){
       const el = document.querySelector('[data-bind="keywords"]');
       if (!el) return;
       el.innerHTML = "";
       (list || []).slice(0,3).forEach(item => {
-        let text, tone;
-        if (typeof item === "string"){
-          text = item;
-          tone = "slate";
-        } else {
-          text = item?.text ?? "";
-          tone = normalizeTone(item?.tone);
-        }
+        const text = typeof item === "string" ? item : (item?.text ?? "");
+        const tone = typeof item === "string" ? "slate" : normalizeTone(item?.tone);
         const span = document.createElement("span");
         span.className = `chip chip--${tone}`;
         span.textContent = String(text ?? "");
         el.appendChild(span);
       });
     }
-
     function renderMbti(mbti){
       const card = document.getElementById("personaCard");
       const el = document.querySelector('[data-bind="mbti"]');
       const m = String(mbti || "").trim().toUpperCase();
-
       if (!m || m === "NA"){
-        if (card) card.classList.add("is-hidden");
+        card?.classList.add("is-hidden");
         return;
       }
-
-      if (card) card.classList.remove("is-hidden");
-      if (!el) return;
-
-      el.textContent = m;
-      el.classList.remove("mbti--green","mbti--purple","mbti--yellow","mbti--blue","mbti--slate");
-      el.classList.add(mbtiColorClass(m));
+      card?.classList.remove("is-hidden");
+      if (el) el.textContent = m;
     }
-
     function render(data){
       const r = data?.report || {};
       const p = r.persona || {};
@@ -501,7 +453,7 @@
       bindText("nickname", r.nickname ?? "");
       bindText("wish", r.wish ?? "");
       bindText("reason", p.reason ?? "");
-      bindText("signature", r.signature ?? "");
+      bindText("signature", r.signature ?? "AI 春节报告 · 仅供分享");
       bindText("generatedAtLabel", formatDateLabel(data?.generatedAt));
 
       renderActivities(r.activities);
@@ -509,12 +461,43 @@
       renderMbti(p.mbti);
     }
 
-    try{
-      const data = JSON.parse($("#report-data").textContent);
-      render(data);
-    }catch(e){
-      console.error("JSON 解析失败：", e);
+    function getId(){
+      const qs = new URLSearchParams(location.search);
+      return qs.get("id");
     }
+
+    function isExpired(generatedAtIso){
+      try{
+        const t = new Date(generatedAtIso).getTime();
+        if (Number.isNaN(t)) return false;
+        const ageMs = Date.now() - t;
+        return ageMs > 7 * 24 * 60 * 60 * 1000;
+      }catch{ return false; }
+    }
+
+    (async function init(){
+      const id = getId();
+      if (!id){
+        document.body.innerHTML = "<p style='padding:16px;font-family:system-ui'>缺少参数：?id=xxx</p>";
+        return;
+      }
+      const url = `../reports/${encodeURIComponent(id)}.json`;
+      try{
+        const res = await fetch(url, { cache: "no-store" });
+        if (!res.ok) throw new Error("not found");
+        const data = await res.json();
+
+        if (isExpired(data?.generatedAt)){
+          document.body.innerHTML = "<p style='padding:16px;font-family:system-ui'>这个海报链接已过期（7天），请重新生成一版。</p>";
+          return;
+        }
+
+        render(data);
+      }catch(e){
+        document.body.innerHTML = "<p style='padding:16px;font-family:system-ui'>海报不存在或已被清理，请重新生成一版。</p>";
+      }
+    })();
   </script>
 </body>
 </html>
+
