@@ -1,0 +1,54 @@
+
+name: Cleanup old reports
+
+on:
+  schedule:
+    - cron: "30 0 * * *"   # 每天 UTC 00:30 执行（可改）
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Remove reports older than 7 days
+        run: |
+          node -e "
+          const fs=require('fs');
+          const path=require('path');
+          const dir='reports';
+          if(!fs.existsSync(dir)) process.exit(0);
+          const now=Date.now();
+          const maxAge=7*24*60*60*1000;
+          const files=fs.readdirSync(dir).filter(f=>f.endsWith('.json'));
+          let removed=0;
+          for(const f of files){
+            const p=path.join(dir,f);
+            try{
+              const raw=fs.readFileSync(p,'utf8');
+              const data=JSON.parse(raw);
+              const t=new Date(data.generatedAt).getTime();
+              if(!Number.isNaN(t) && (now-t)>maxAge){
+                fs.unlinkSync(p);
+                removed++;
+              }
+            }catch(e){}
+          }
+          console.log('removed', removed);
+          "
+
+      - name: Commit changes
+        run: |
+          if git status --porcelain | grep -q "reports/"; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add reports
+            git commit -m "cleanup: remove reports older than 7 days"
+            git push
+          else
+            echo "No old reports to remove."
+          fi
