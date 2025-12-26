@@ -438,12 +438,18 @@
       const card = document.getElementById("personaCard");
       const el = document.querySelector('[data-bind="mbti"]');
       const m = String(mbti || "").trim().toUpperCase();
+
       if (!m || m === "NA"){
-        card?.classList.add("is-hidden");
+        if (card) card.classList.add("is-hidden");
         return;
       }
-      card?.classList.remove("is-hidden");
-      if (el) el.textContent = m;
+
+      if (card) card.classList.remove("is-hidden");
+      if (!el) return;
+
+      el.textContent = m;
+      el.classList.remove("mbti--green","mbti--purple","mbti--yellow","mbti--blue","mbti--slate");
+      el.classList.add(mbtiColorClass(m));
     }
     function render(data){
       const r = data?.report || {};
