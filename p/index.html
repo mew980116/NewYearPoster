@@ -383,10 +383,43 @@
   </div>
 
   
+
 <script>
   const $ = (s) => document.querySelector(s);
 
-  // 允许的关键词 tone
+  // ========= 小工具：Toast，不替换整个页面 =========
+  function ensureToast(){
+    let el = document.getElementById("toast");
+    if (el) return el;
+    el = document.createElement("div");
+    el.id = "toast";
+    el.style.cssText = [
+      "position:fixed",
+      "right:12px",
+      "bottom:12px",
+      "max-width:min(92vw,520px)",
+      "padding:10px 12px",
+      "border-radius:12px",
+      "background:rgba(0,0,0,.72)",
+      "color:#fff",
+      "font:13px/1.4 system-ui,-apple-system,Segoe UI,PingFang SC,Microsoft YaHei,Arial",
+      "box-shadow:0 10px 30px rgba(0,0,0,.25)",
+      "z-index:9999",
+      "display:none"
+    ].join(";");
+    document.body.appendChild(el);
+    return el;
+  }
+
+  function toast(msg, ms=4500){
+    const el = ensureToast();
+    el.textContent = msg;
+    el.style.display = "block";
+    clearTimeout(el._t);
+    el._t = setTimeout(() => { el.style.display = "none"; }, ms);
+  }
+
+  // ========= 业务工具 =========
   const ALLOWED_TONES = new Set(["red","gold","green","blue","purple","slate"]);
 
   function normalizeTone(tone){
@@ -405,17 +438,22 @@
     }catch{ return ""; }
   }
 
-  function bindText(key, value){
+  // ✅ 关键：只有 value 真的有内容时才覆盖，避免把占位文案清空
+  function safeBindText(key, value){
+    const v = value == null ? "" : String(value);
+    if (!v.trim()) return; // 没内容就不动 DOM
     document.querySelectorAll(`[data-bind="${key}"]`).forEach(el => {
-      el.textContent = String(value ?? "");
+      el.textContent = v;
     });
   }
 
+  // ✅ 关键：列表只有在有数据时才清空并渲染，避免把占位内容清空
   function renderActivities(list){
     const el = document.querySelector('[data-bind="activities"]');
     if (!el) return;
+    if (!Array.isArray(list) || list.length === 0) return; // 没数据不动
     el.innerHTML = "";
-    (list || []).slice(0,3).forEach(t => {
+    list.slice(0,3).forEach(t => {
       const li = document.createElement("li");
       li.className = "act";
       const dot = document.createElement("span");
@@ -431,9 +469,11 @@
   function renderKeywords(list){
     const el = document.querySelector('[data-bind="keywords"]');
     if (!el) return;
+    if (!Array.isArray(list) || list.length === 0) return; // 没数据不动
     el.innerHTML = "";
-    (list || []).slice(0,3).forEach(item => {
+    list.slice(0,3).forEach(item => {
       const text = typeof item === "string" ? item : (item?.text ?? "");
+      if (!String(text).trim()) return;
       const tone = typeof item === "string" ? "slate" : normalizeTone(item?.tone);
       const span = document.createElement("span");
       span.className = `chip chip--${tone}`;
@@ -442,7 +482,6 @@
     });
   }
 
-  // ✅ MBTI -> 色块 class（与 v2 一致）
   function mbtiColorClass(mbti){
     const m = String(mbti || "").trim().toUpperCase();
     const green  = new Set(["ENFJ","ENFP","INFJ","INFP"]);
@@ -461,8 +500,8 @@
     const el = document.querySelector('[data-bind="mbti"]');
     const m = String(mbti || "").trim().toUpperCase();
 
-    // MBTI 缺失/NA：隐藏整块
     if (!m || m === "NA"){
+      // NA：隐藏人格卡片（不改其它文本）
       if (card) card.classList.add("is-hidden");
       return;
     }
@@ -473,7 +512,6 @@
     el.textContent = m;
     el.classList.remove("mbti--green","mbti--purple","mbti--yellow","mbti--blue","mbti--slate");
 
-    // ✅ 兜底：避免 classList.add 接收到空 token 导致 DOMException
     let cls = "mbti--slate";
     try{
       const maybe = mbtiColorClass(m);
@@ -488,12 +526,12 @@
     const r = data?.report || {};
     const p = r.persona || {};
 
-    bindText("coverTitle", r.coverTitle ?? "");
-    bindText("nickname", r.nickname ?? "");
-    bindText("wish", r.wish ?? "");
-    bindText("reason", p.reason ?? "");
-    bindText("signature", r.signature ?? "AI 春节报告 · 仅供分享");
-    bindText("generatedAtLabel", formatDateLabel(data?.generatedAt));
+    safeBindText("coverTitle", r.coverTitle);
+    safeBindText("nickname", r.nickname);
+    safeBindText("wish", r.wish);
+    safeBindText("reason", p.reason);
+    safeBindText("signature", r.signature || "AI 春节报告 · 仅供分享");
+    safeBindText("generatedAtLabel", formatDateLabel(data?.generatedAt));
 
     renderActivities(r.activities);
     renderKeywords(r.keywords);
@@ -510,32 +548,17 @@
     try{
       const t = new Date(generatedAtIso).getTime();
       if (Number.isNaN(t)) return false;
-      const ageMs = Date.now() - t;
-      return ageMs > 7 * 24 * 60 * 60 * 1000;
+      return (Date.now() - t) > 7 * 24 * 60 * 60 * 1000;
     }catch{ return false; }
   }
 
-  function showMessage(html){
-    // 尽量不破坏整体布局：如果有专门容器最好；没有就直接替换 body
-    const box = document.getElementById("errorBox");
-    if (box){
-      box.innerHTML = html;
-      box.style.display = "block";
-      return;
-    }
-    document.body.innerHTML = html;
-  }
-
-  // ✅ fetch + 重试 + 诊断（解决“偶尔能读到、偶尔读不到/读到HTML”的情况）
   async function fetchJsonWithRetry(url, times = 3){
     let lastErr;
     for (let i = 0; i < times; i++){
       try{
         const res = await fetch(url, {
           cache: "no-store",
-          headers: {
-            "Cache-Control": "no-store"
-          }
+          headers: { "Cache-Control": "no-store" }
         });
 
         const ct = (res.headers.get("content-type") || "").toLowerCase();
@@ -544,71 +567,65 @@
         console.log("[fetch]", res.status, res.url, ct);
         console.log("[body head]", raw.slice(0, 120));
 
-        if (!res.ok){
-          throw new Error(`HTTP ${res.status} ${res.statusText}`);
-        }
+        if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
 
-        // 若偶发拿到 HTML（常见是缓存/重写/错误页），直接明确报错
+        // 防止偶发拿到 HTML（例如缓存/错误页/重写）
         if (!raw.trim().startsWith("{")){
-          throw new Error(`返回内容不是 JSON（可能是HTML/缓存/错误页）。开头：${raw.slice(0,80)}`);
+          throw new Error("返回内容不是 JSON（可能是HTML/缓存/错误页）");
         }
 
         return JSON.parse(raw);
       }catch(e){
         lastErr = e;
-        // 指数退避：250ms / 500ms / 1000ms...
         await new Promise(r => setTimeout(r, 250 * (2 ** i)));
       }
     }
     throw lastErr;
   }
 
-  (async function init(){
+  // ========= 初始化 =========
+  async function init(){
     const id = getId();
     if (!id){
-      showMessage("<p style='padding:16px;font-family:system-ui'>缺少参数：?id=xxx</p>");
+      toast("缺少参数：?id=xxx");
       return;
     }
 
-    // id 可能带 .json，做个容错
-    const safeId = id.replace(/\\.json$/i, "");
+    const safeId = id.replace(/\.json$/i, "");
 
-    // ✅ 用 URL 解析相对路径（适配 GitHub Pages 子目录）
-    // 你当前页面在 /NewYearPoster/p/ 下，这里会正确指向 /NewYearPoster/reports/{id}.json
+    // 用 URL 计算相对路径：/NewYearPoster/p/ -> /NewYearPoster/reports/
     const urlObj = new URL(`../reports/${encodeURIComponent(safeId)}.json`, location.href);
 
-    // ✅ cache-bust：降低“偶发命中旧缓存/旧404/旧HTML”
+    // cache bust：降低 GitHub Pages/CDN/浏览器缓存导致的不稳定
     urlObj.searchParams.set("_ts", Date.now().toString());
 
     try{
       const data = await fetchJsonWithRetry(urlObj.toString(), 3);
 
       if (isExpired(data?.generatedAt)){
-        showMessage("<p style='padding:16px;font-family:system-ui'>这个海报链接已过期（7天），请重新生成一版。</p>");
+        toast("链接已过期（7天），请重新生成。");
         return;
       }
 
-      // ✅ 渲染阶段单独 try：避免加载成功但渲染报错也被误判成“海报不存在”
       try{
         render(data);
       }catch(renderErr){
         console.error("渲染失败：", renderErr);
-        showMessage(
-          `<p style='padding:16px;font-family:system-ui'>
-            渲染失败：${String(renderErr).replace(/</g,"&lt;")}
-          </p>`
-        );
+        toast("渲染失败（请看控制台错误）");
       }
     }catch(loadErr){
       console.error("加载失败：", loadErr);
-      showMessage(
-        `<p style='padding:16px;font-family:system-ui'>
-          海报加载失败：${String(loadErr).replace(/</g,"&lt;")}<br/>
-          <small style="opacity:.7">请打开控制台/Network 查看 reports JSON 的请求是否返回了 HTML 或 404。</small>
-        </p>`
-      );
+      // ✅ 这里不替换页面、不清空任何文字，只提示 + 保留占位内容
+      toast("加载报告失败（可能是缓存/返回HTML/网络波动），请刷新或稍后再试。");
     }
-  })();
+  }
+
+  // 等 DOM 就绪再跑，避免“某次刷新元素还没挂上”
+  if (document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
 </script>
 </body>
 </html>
