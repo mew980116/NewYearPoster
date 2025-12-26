@@ -434,6 +434,20 @@
         el.appendChild(span);
       });
     }
+    
+function mbtiColorClass(mbti){
+  const m = String(mbti || "").trim().toUpperCase();
+  const green  = new Set(["ENFJ","ENFP","INFJ","INFP"]);
+  const purple = new Set(["ENTJ","ENTP","INTJ","INTP"]);
+  const yellow = new Set(["ESFP","ESTP","ISFP","ISTP"]);
+  const blue   = new Set(["ESFJ","ESTJ","ISFJ","ISTJ"]);
+  if (green.has(m))  return "mbti--green";
+  if (purple.has(m)) return "mbti--purple";
+  if (yellow.has(m)) return "mbti--yellow";
+  if (blue.has(m))   return "mbti--blue";
+  return "mbti--slate";
+}
+
     function renderMbti(mbti){
       const card = document.getElementById("personaCard");
       const el = document.querySelector('[data-bind="mbti"]');
@@ -500,6 +514,7 @@
 
         render(data);
       }catch(e){
+        console.error("加载/渲染失败：", e);
         document.body.innerHTML = "<p style='padding:16px;font-family:system-ui'>海报不存在或已被清理，请重新生成一版。</p>";
       }
     })();
