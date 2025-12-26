@@ -13,7 +13,6 @@
       --bg2:#0b0b10;
 
       --card: rgba(255,255,255,.08);
-      --card2: rgba(0,0,0,.14);
       --border: rgba(255,255,255,.14);
 
       --text: rgba(255,255,255,.92);
@@ -27,16 +26,13 @@
       --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
               "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
 
-      /* 单栏宽度：PC 更好看，移动端自适应 */
       --page-max: 820px;
     }
-
     @media (prefers-color-scheme: light){
       :root{
         --bg1:#fff3ef;
         --bg2:#fff8f5;
         --card: rgba(255,255,255,.92);
-        --card2: rgba(255,255,255,.76);
         --border: rgba(20,20,28,.10);
 
         --text: rgba(15,15,20,.92);
@@ -60,7 +56,6 @@
       overflow-x:hidden;
     }
 
-    /* 顶栏 */
     .topbar{
       position: sticky;
       top: 0;
@@ -85,17 +80,11 @@
       justify-content:space-between;
       gap: 12px;
     }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width: 0;
-    }
+    .brand{ display:flex; align-items:center; gap:10px; min-width: 0; }
     .logo{
       width: 34px; height: 34px;
       border-radius: 12px;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,215,0,.95), rgba(255,70,70,.85));
+      background: radial-gradient(circle at 30% 30%, rgba(255,215,0,.95), rgba(255,70,70,.85));
       box-shadow: 0 10px 22px rgba(0,0,0,.22);
       flex: 0 0 auto;
     }
@@ -118,12 +107,7 @@
       text-overflow: ellipsis;
     }
 
-    .actions{
-      display:flex;
-      gap:8px;
-      align-items:center;
-      flex: 0 0 auto;
-    }
+    .actions{ display:flex; gap:8px; align-items:center; flex: 0 0 auto; }
     .btn{
       border: 1px solid var(--border);
       background: rgba(255,255,255,.06);
@@ -137,19 +121,14 @@
     }
     .btn:hover{ background: rgba(255,255,255,.10); }
     .btn:active{ transform: translateY(1px); }
-    .btn[disabled]{
-      opacity: .55;
-      cursor:not-allowed;
-    }
+    .btn[disabled]{ opacity: .55; cursor:not-allowed; }
 
-    /* 页面容器 */
     .wrap{
       max-width: var(--page-max);
       margin: 0 auto;
       padding: 18px 14px 28px;
     }
 
-    /* 海报主卡 */
     .panel{
       border-radius: var(--radius);
       border: 1px solid var(--border);
@@ -157,7 +136,6 @@
       box-shadow: var(--shadow);
       overflow:hidden;
     }
-
     .header{
       padding: 20px 18px 14px;
       border-bottom: 1px solid rgba(255,255,255,.06);
@@ -166,17 +144,8 @@
       gap: 10px;
       align-items:flex-end;
     }
-    .kicker{
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: .3px;
-    }
-    .title{
-      margin: 8px 0 0;
-      font-size: 24px;
-      letter-spacing: .6px;
-      line-height: 1.15;
-    }
+    .kicker{ font-size: 12px; color: var(--muted); letter-spacing: .3px; }
+    .title{ margin: 8px 0 0; font-size: 24px; letter-spacing: .6px; line-height: 1.15; }
     .stamp{
       font-weight: 900;
       font-size: 18px;
@@ -189,35 +158,12 @@
       flex: 0 0 auto;
     }
 
-    .body{
-      padding: 16px 18px 18px;
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-    }
+    .body{ padding: 16px 18px 18px; display:flex; flex-direction:column; gap: 12px; }
+    .metaLine{ display:flex; justify-content:space-between; align-items:baseline; gap: 12px; flex-wrap: wrap; }
+    .nickname{ font-weight: 800; font-size: 15px; }
+    .generatedAt{ font-size: 12px; color: var(--muted); }
 
-    .metaLine{
-      display:flex;
-      justify-content:space-between;
-      align-items:baseline;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .nickname{
-      font-weight: 800;
-      font-size: 15px;
-    }
-    .generatedAt{
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .cards{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
+    .cards{ display:grid; grid-template-columns: 1fr; gap: 12px; }
     .card{
       border-radius: var(--radius-sm);
       border: 1px solid rgba(255,255,255,.10);
@@ -230,7 +176,6 @@
         border: 1px solid rgba(0,0,0,.08);
       }
     }
-
     .card h3{
       margin:0 0 10px;
       font-size: 13px;
@@ -250,95 +195,38 @@
       flex: 0 0 auto;
     }
 
-    .acts{
-      margin:0;
-      padding:0;
-      list-style:none;
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-    }
-    .act{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-    }
+    .acts{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap: 10px; }
+    .act{ display:flex; gap:10px; align-items:flex-start; }
     .dot{
-      width: 9px; height: 9px;
-      margin-top: 6px;
-      border-radius: 99px;
+      width: 9px; height: 9px; margin-top: 6px; border-radius: 99px;
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,70,70,.85));
       box-shadow: 0 10px 18px rgba(255,70,70,.18);
       flex: 0 0 auto;
     }
-    .act p{
-      margin:0;
-      color: var(--text2);
-      line-height: 1.45;
-      font-size: 13px;
-      word-break: break-word;
-    }
+    .act p{ margin:0; color: var(--text2); line-height: 1.45; font-size: 13px; word-break: break-word; }
 
-    .persona{
-      display:grid;
-      grid-template-columns: 76px 1fr;
-      gap: 12px;
-      align-items:start;
-    }
+    .persona{ display:grid; grid-template-columns: 76px 1fr; gap: 12px; align-items:start; }
     .mbti{
-      width: 76px;
-      height: 76px;
-      border-radius: 20px;
-      display:grid;
-      place-items:center;
-      font-weight: 900;
-      letter-spacing: .6px;
+      width: 76px; height: 76px; border-radius: 20px;
+      display:grid; place-items:center; font-weight: 900; letter-spacing: .6px;
       border: 1px solid rgba(255,255,255,.14);
       color: rgba(10,10,14,.92);
       box-shadow: 0 14px 28px rgba(0,0,0,.18);
       user-select: none;
     }
-    .mbti--green{
-      background: radial-gradient(circle at 30% 30%, rgba(146,255,191,1), rgba(52,199,89,.92));
-      border-color: rgba(52,199,89,.28);
-    }
-    .mbti--purple{
-      background: radial-gradient(circle at 30% 30%, rgba(223,179,255,1), rgba(175,82,222,.92));
-      border-color: rgba(175,82,222,.28);
-    }
-    .mbti--yellow{
-      background: radial-gradient(circle at 30% 30%, rgba(255,238,170,1), rgba(255,204,102,.96));
-      border-color: rgba(255,204,102,.32);
-    }
-    .mbti--blue{
-      background: radial-gradient(circle at 30% 30%, rgba(185,220,255,1), rgba(70,140,255,.92));
-      border-color: rgba(70,140,255,.28);
-    }
-    .mbti--slate{
-      background: radial-gradient(circle at 30% 30%, rgba(240,240,245,1), rgba(170,170,185,.92));
-      border-color: rgba(255,255,255,.14);
-    }
+    .mbti--green{ background: radial-gradient(circle at 30% 30%, rgba(146,255,191,1), rgba(52,199,89,.92)); border-color: rgba(52,199,89,.28); }
+    .mbti--purple{ background: radial-gradient(circle at 30% 30%, rgba(223,179,255,1), rgba(175,82,222,.92)); border-color: rgba(175,82,222,.28); }
+    .mbti--yellow{ background: radial-gradient(circle at 30% 30%, rgba(255,238,170,1), rgba(255,204,102,.96)); border-color: rgba(255,204,102,.32); }
+    .mbti--blue{ background: radial-gradient(circle at 30% 30%, rgba(185,220,255,1), rgba(70,140,255,.92)); border-color: rgba(70,140,255,.28); }
+    .mbti--slate{ background: radial-gradient(circle at 30% 30%, rgba(240,240,245,1), rgba(170,170,185,.92)); border-color: rgba(255,255,255,.14); }
 
-    .reason{
-      margin:0;
-      color: var(--text2);
-      line-height:1.5;
-      font-size: 13px;
-      word-break: break-word;
-    }
+    .reason{ margin:0; color: var(--text2); line-height:1.5; font-size: 13px; word-break: break-word; }
 
-    .chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 8px;
-    }
+    .chips{ display:flex; flex-wrap:wrap; gap: 8px; }
     .chip{
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
+      font-size: 12px; padding: 6px 10px; border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
+      background: rgba(255,255,255,.06); color: var(--text);
     }
     .chip--slate{ background: rgba(255,255,255,.06); }
     .chip--red{ background: rgba(255,70,70,.16); border-color: rgba(255,70,70,.24); }
@@ -347,13 +235,7 @@
     .chip--blue{ background: rgba(70,140,255,.16); border-color: rgba(70,140,255,.24); }
     .chip--purple{ background: rgba(175,82,222,.16); border-color: rgba(175,82,222,.24); }
 
-    .wish{
-      margin:0;
-      color: var(--text2);
-      line-height:1.55;
-      font-size: 13px;
-      word-break: break-word;
-    }
+    .wish{ margin:0; color: var(--text2); line-height:1.55; font-size: 13px; word-break: break-word; }
 
     .foot{
       padding: 12px 18px 18px;
@@ -366,7 +248,6 @@
       border-top: 1px solid rgba(255,255,255,.06);
     }
 
-    /* 状态条：不替换正文，只提示加载状态 */
     .status{
       margin-top: 12px;
       padding: 10px 12px;
@@ -381,8 +262,6 @@
       justify-content:space-between;
       flex-wrap: wrap;
     }
-
-    /* 复用 spinner */
     .spinner{
       width: 14px; height: 14px;
       border-radius: 999px;
@@ -395,10 +274,7 @@
 
     .is-hidden{ display:none !important; }
 
-    /* =========================
-       分享浮层 + 截图容器
-       ========================= */
-
+    /* ===== 分享浮层 + 截图容器 ===== */
     .share-overlay{
       position: fixed;
       inset: 0;
@@ -478,7 +354,6 @@
       .share-tip{ color: rgba(0,0,0,.56); }
     }
 
-    /* 截图容器（隐藏） */
     .capture-wrap{
       position: fixed;
       left: -99999px;
@@ -487,8 +362,6 @@
       height: 1px;
       overflow: hidden;
     }
-
-    /* 手机宽度（可改 375/390/420） */
     .capture-phone{
       width: 420px;
       background:
@@ -500,7 +373,6 @@
       padding: 14px;
       border-radius: 26px;
     }
-
     .cap-header{
       display:flex;
       align-items:flex-end;
@@ -514,22 +386,13 @@
     .cap-kicker{ font-size: 12px; color: rgba(255,255,255,.70); }
     .cap-title{ margin-top: 6px; font-size: 20px; font-weight: 900; letter-spacing: .5px; line-height: 1.12; }
     .cap-stamp{
-      font-weight: 900;
-      font-size: 18px;
-      padding: 10px 12px;
-      border-radius: 16px;
+      font-weight: 900; font-size: 18px;
+      padding: 10px 12px; border-radius: 16px;
       background: rgba(255,255,255,.08);
       border: 1px solid rgba(255,255,255,.12);
       transform: rotate(-6deg);
     }
-
-    .cap-meta{
-      display:flex;
-      justify-content:space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-      padding: 10px 6px 6px;
-    }
+    .cap-meta{ display:flex; justify-content:space-between; gap: 10px; flex-wrap: wrap; padding: 10px 6px 6px; }
     .cap-to{ font-weight: 800; font-size: 13px; }
     .cap-date{ font-size: 12px; color: rgba(255,255,255,.66); }
 
@@ -557,7 +420,6 @@
       background: rgba(255,255,255,.06);
       color: rgba(255,255,255,.78);
     }
-
     .cap-acts{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap: 8px; }
     .cap-acts li{ display:flex; gap: 10px; align-items:flex-start; }
     .cap-acts .dot{
@@ -583,12 +445,9 @@
     .cap-mbti--slate{ background: radial-gradient(circle at 30% 30%, rgba(240,240,245,1), rgba(170,170,185,.92)); }
 
     .cap-reason{ font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.84); }
-
     .cap-chips{ display:flex; flex-wrap: wrap; gap: 8px; }
     .cap-chip{
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
+      font-size: 12px; padding: 6px 10px; border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
       color: rgba(255,255,255,.92);
@@ -601,13 +460,7 @@
     .cap-chip--slate{ background: rgba(255,255,255,.06); }
 
     .cap-wish{ font-size: 13px; line-height: 1.55; color: rgba(255,255,255,.84); }
-
-    .cap-foot{
-      margin-top: 10px;
-      padding: 10px 6px 2px;
-      font-size: 12px;
-      color: rgba(255,255,255,.62);
-    }
+    .cap-foot{ margin-top: 10px; padding: 10px 6px 2px; font-size: 12px; color: rgba(255,255,255,.62); }
   </style>
 </head>
 
@@ -680,7 +533,7 @@
             <span id="statusText">准备加载报告…</span>
           </span>
           <span id="statusHint" style="color:var(--muted)">
-            GitHub Pages 偶有延迟，30～60 秒后通常可自动成功
+            若卡住不动，现在每次请求会自动超时并重试
           </span>
         </div>
       </div>
@@ -777,23 +630,17 @@
   </div>
 
   <!-- html2canvas：用于把“手机渲染区”截图成 PNG -->
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4canvas.min.js</script>
+  https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js</script>
 
   <script>
-    // =========================
-    // 主页面渲染（保持 JSON schema）
-    // =========================
     const $ = (s) => document.querySelector(s);
     const ALLOWED_TONES = new Set(["red","gold","green","blue","purple","slate"]);
-
-    // 当前加载到的数据（分享 PNG 用）
     window.__REPORT_DATA__ = null;
 
     function normalizeTone(tone){
       const t = String(tone || "").trim().toLowerCase();
       return ALLOWED_TONES.has(t) ? t : "slate";
     }
-
     function formatDateLabel(iso){
       try{
         const d = new Date(iso);
@@ -804,20 +651,14 @@
         return `生成于 ${y}-${m}-${day}`;
       }catch{ return ""; }
     }
-
-    // ✅ 不在空数据时清掉占位文本
     function safeBindText(key, value){
       const v = value == null ? "" : String(value);
       if (!v.trim()) return;
-      document.querySelectorAll(`[data-bind="${key}"]`).forEach(el => {
-        el.textContent = v;
-      });
+      document.querySelectorAll(`[data-bind="${key}"]`).forEach(el => el.textContent = v);
     }
-
     function renderActivities(list){
       const el = document.querySelector('[data-bind="activities"]');
-      if (!el) return;
-      if (!Array.isArray(list) || list.length === 0) return;
+      if (!el || !Array.isArray(list) || list.length === 0) return;
       el.innerHTML = "";
       list.slice(0,3).forEach(t => {
         const li = document.createElement("li");
@@ -831,11 +672,9 @@
         el.appendChild(li);
       });
     }
-
     function renderKeywords(list){
       const el = document.querySelector('[data-bind="keywords"]');
-      if (!el) return;
-      if (!Array.isArray(list) || list.length === 0) return;
+      if (!el || !Array.isArray(list) || list.length === 0) return;
       el.innerHTML = "";
       list.slice(0,3).forEach(item => {
         const text = typeof item === "string" ? item : (item?.text ?? "");
@@ -847,7 +686,6 @@
         el.appendChild(span);
       });
     }
-
     function mbtiColorClass(mbti){
       const m = String(mbti || "").trim().toUpperCase();
       const green  = new Set(["ENFJ","ENFP","INFJ","INFP"]);
@@ -860,7 +698,6 @@
       if (blue.has(m))   return "mbti--blue";
       return "mbti--slate";
     }
-
     function renderMbti(mbti){
       const card = document.getElementById("personaCard");
       const el = document.querySelector('[data-bind="mbti"]');
@@ -877,23 +714,18 @@
       el.classList.remove("mbti--green","mbti--purple","mbti--yellow","mbti--blue","mbti--slate");
       el.classList.add(mbtiColorClass(m) || "mbti--slate");
     }
-
     function render(data){
       const r = data?.report || {};
       const p = r.persona || {};
-
       safeBindText("coverTitle", r.coverTitle);
       safeBindText("nickname", r.nickname);
       safeBindText("wish", r.wish);
       safeBindText("reason", p.reason);
       safeBindText("signature", r.signature || "AI 春节报告 · 仅供分享");
       safeBindText("generatedAtLabel", formatDateLabel(data?.generatedAt));
-
       renderActivities(r.activities);
       renderKeywords(r.keywords);
       renderMbti(p.mbti);
-
-      // 供分享 PNG 使用
       window.__REPORT_DATA__ = data;
     }
 
@@ -902,7 +734,6 @@
       const id = qs.get("id");
       return id ? id.trim() : "";
     }
-
     function isExpired(generatedAtIso){
       try{
         const t = new Date(generatedAtIso).getTime();
@@ -911,48 +742,52 @@
       }catch{ return false; }
     }
 
-    // =========================
-    // 稳定加载：轮询/重试（适配 30~60 秒延迟）
-    // =========================
     const statusText = $("#statusText");
     const spinner = $("#spinner");
-
     function setStatus(msg, loading=true){
       if (statusText) statusText.textContent = msg;
       if (spinner) spinner.style.display = loading ? "inline-block" : "none";
     }
 
-    async function fetchJsonWithPolling(urlObj, maxWaitMs = 70_000){
+    // ✅ 关键修复：为每次 fetch 设置超时，避免“pending 卡死”
+    async function fetchTextWithTimeout(url, ms = 12000){
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), ms);
+      try{
+        const res = await fetch(url, {
+          cache: "no-store",
+          headers: { "Cache-Control": "no-store" },
+          signal: ctrl.signal
+        });
+        const raw0 = await res.text();
+        return { res, raw0 };
+      } finally {
+        clearTimeout(t);
+      }
+    }
+
+    async function fetchJsonWithPolling(urlObj, maxWaitMs = 70000){
       const start = Date.now();
       let attempt = 0;
       let lastErr = null;
 
       while (Date.now() - start < maxWaitMs){
         attempt++;
-
-        // 每次请求加 _ts，尽量绕过缓存层
         urlObj.searchParams.set("_ts", Date.now().toString());
         const url = urlObj.toString();
 
         setStatus(`正在加载报告…（第 ${attempt} 次尝试）`, true);
 
         try{
-          const res = await fetch(url, {
-            cache: "no-store",
-            headers: { "Cache-Control": "no-store" }
-          });
-
-          const raw0 = await res.text();
-          // 去 BOM，避免偶发解析失败
+          const { res, raw0 } = await fetchTextWithTimeout(url, 12000);
           const raw = raw0.replace(/^\uFEFF/, "");
 
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const data = JSON.parse(raw);
-          return data;
+          return JSON.parse(raw);
         }catch(e){
           lastErr = e;
           const wait = Math.min(8000, [2000,3000,5000,8000][Math.min(attempt-1,3)]);
-          setStatus(`暂未就绪，${Math.round(wait/1000)} 秒后自动重试…`, true);
+          setStatus(`暂未就绪（${String(e).replace(/\\s+/g,' ').slice(0,60)}），${Math.round(wait/1000)} 秒后重试…`, true);
           await new Promise(r => setTimeout(r, wait));
         }
       }
@@ -966,20 +801,15 @@
         setStatus("缺少参数：?id=xxx", false);
         return;
       }
-
-      const safeId = id.replace(/\.json$/i, "");
-
-      // 页面在 /p/，json 在 /reports/：用 URL 计算更稳
+      const safeId = id.replace(/\\.json$/i, "");
       const urlObj = new URL(`../reports/${encodeURIComponent(safeId)}.json`, location.href);
 
       try{
-        const data = await fetchJsonWithPolling(urlObj, 70_000);
-
+        const data = await fetchJsonWithPolling(urlObj, 70000);
         if (isExpired(data?.generatedAt)){
           setStatus("链接已过期（7 天），请重新生成。", false);
           return;
         }
-
         render(data);
         setStatus("加载成功 ✅", false);
       }catch(e){
@@ -988,9 +818,7 @@
       }
     }
 
-    // =========================
-    // 顶部按钮：复制 / 重试
-    // =========================
+    // 复制链接
     $("#btnCopy")?.addEventListener("click", async () => {
       try{
         await navigator.clipboard.writeText(location.href);
@@ -1007,12 +835,9 @@
         setTimeout(() => setStatus("加载成功 ✅", false), 1200);
       }
     });
-
     $("#btnReload")?.addEventListener("click", () => load());
 
-    // =========================
-    // 分享图片：渲染手机容器 -> html2canvas -> PNG预览+下载
-    // =========================
+    // ===== 分享 PNG =====
     const overlay = document.getElementById("shareOverlay");
     const shareImg = document.getElementById("shareImg");
     const shareLoading = document.getElementById("shareLoading");
@@ -1034,19 +859,12 @@
         lastObjectUrl = null;
       }
     }
-    overlay?.addEventListener("click", (e) => {
-      if (e.target === overlay) closeOverlay();
-    });
+    overlay?.addEventListener("click", (e) => { if (e.target === overlay) closeOverlay(); });
     document.getElementById("btnShareClose")?.addEventListener("click", closeOverlay);
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && overlay && !overlay.classList.contains("is-hidden")) closeOverlay();
-    });
 
     function capSetText(key, value){
       const v = value == null ? "" : String(value);
-      document.querySelectorAll(`[data-cap="${key}"]`).forEach(el => {
-        el.textContent = v;
-      });
+      document.querySelectorAll(`[data-cap="${key}"]`).forEach(el => el.textContent = v);
     }
     function capRenderActivities(list){
       const el = document.querySelector('[data-cap="activities"]');
@@ -1106,14 +924,12 @@
     function capRender(data){
       const r = data?.report || {};
       const p = r.persona || {};
-
       capSetText("coverTitle", r.coverTitle ?? "");
       capSetText("nickname", r.nickname ?? "");
       capSetText("wish", r.wish ?? "");
       capSetText("reason", p.reason ?? "");
       capSetText("signature", r.signature ?? "AI 春节报告 · 仅供分享");
       capSetText("generatedAtLabel", formatDateLabel(data?.generatedAt));
-
       capRenderActivities(r.activities);
       capRenderKeywords(r.keywords);
       capRenderMbti(p.mbti);
@@ -1125,10 +941,8 @@
         setStatus("请先等待加载成功，再分享图片。", false);
         return;
       }
-
-      // 基础校验：如果 html2canvas 没加载到（CDN异常），给提示
       if (typeof html2canvas !== "function"){
-        alert("图片生成组件加载失败（html2canvas）。请稍后刷新重试。");
+        alert("图片生成组件加载失败（html2canvas）。请刷新后重试。");
         return;
       }
 
@@ -1138,29 +952,16 @@
       btnDownload.disabled = true;
       shareLoadingText.textContent = "正在生成图片…";
 
-      // 渲染到隐藏手机容器
       capRender(data);
-
-      // 等待两帧，确保样式应用完成
       await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
       const node = document.getElementById("capturePhone");
-
-      // 生成 PNG
-      const canvas = await html2canvas(node, {
-        backgroundColor: null,
-        scale: 2,
-        useCORS: true
-      });
-
+      const canvas = await html2canvas(node, { backgroundColor: null, scale: 2, useCORS: true });
       const dataUrl = canvas.toDataURL("image/png");
       shareImg.src = dataUrl;
 
-      // 生成可下载的 blob URL（比 dataUrl 更稳）
       const blob = await (await fetch(dataUrl)).blob();
       const objUrl = URL.createObjectURL(blob);
-
-      // 清理旧的 URL
       if (lastObjectUrl) URL.revokeObjectURL(lastObjectUrl);
       lastObjectUrl = objUrl;
 
@@ -1179,7 +980,6 @@
     }
 
     $("#btnShare")?.addEventListener("click", generateSharePng);
-
     document.getElementById("btnShareCopyLink")?.addEventListener("click", async () => {
       try{
         await navigator.clipboard.writeText(location.href);
@@ -1195,7 +995,7 @@
       }
     });
 
-    // DOM ready
+    // 启动
     if (document.readyState === "loading"){
       document.addEventListener("DOMContentLoaded", load);
     }else{
