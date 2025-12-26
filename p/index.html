@@ -501,18 +501,28 @@ function mbtiColorClass(mbti){
         document.body.innerHTML = "<p style='padding:16px;font-family:system-ui'>缺少参数：?id=xxx</p>";
         return;
       }
-      const url = `../reports/${encodeURIComponent(id)}.json`;
+      
+const urlObj = new URL(`../reports/${encodeURIComponent(id)}.json`, location.href);
+// cache bust：每次都变，避免 CDN/浏览器/Service Worker 命中旧缓存
+urlObj.searchParams.set("_ts", Date.now().toString());
+const url = urlObj.toString();
+
       try{
-        const res = await fetch(url, { cache: "no-store" });
-        if (!res.ok) throw new Error("not found");
-        const data = await res.json();
 
-        if (isExpired(data?.generatedAt)){
-          document.body.innerHTML = "<p style='padding:16px;font-family:system-ui'>这个海报链接已过期（7天），请重新生成一版。</p>";
-          return;
-        }
+const res = await fetch(url, { cache: "no-store" });
+const ct = res.headers.get("content-type") || "";
+const raw = await res.text();
 
-        render(data);
+console.log("[fetch]", res.status, res.url, ct);
+console.log("[body head]", raw.slice(0, 120));
+
+if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+if (!raw.trim().startsWith("{")) {
+  throw new Error("返回内容不是 JSON，开头是：" + raw.slice(0, 80));
+}
+
+const data = JSON.parse(raw);
+
       }catch(e){
         console.error("加载/渲染失败：", e);
         document.body.innerHTML = "<p style='padding:16px;font-family:system-ui'>海报不存在或已被清理，请重新生成一版。</p>";
