@@ -4,13 +4,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>新春假期海报（PC版）</title>
-
+  <title>新春假期海报</title>
   <meta name="color-scheme" content="dark light">
+
   <style>
     :root{
       --bg1:#07070b;
       --bg2:#0b0b10;
+
       --card: rgba(255,255,255,.08);
       --card2: rgba(0,0,0,.14);
       --border: rgba(255,255,255,.14);
@@ -19,16 +20,15 @@
       --text2: rgba(255,255,255,.78);
       --muted: rgba(255,255,255,.62);
 
-      --radius: 22px;
-      --radius-sm: 16px;
+      --radius: 24px;
+      --radius-sm: 18px;
       --shadow: 0 18px 46px rgba(0,0,0,.40);
 
       --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
               "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
 
-      /* PC 尺寸 */
-      --page-max: 1100px;
-      --poster-w: 520px;
+      /* 单栏宽度：PC 更好看，移动端自适应 */
+      --page-max: 820px;
     }
 
     @media (prefers-color-scheme: light){
@@ -60,11 +60,11 @@
       overflow-x:hidden;
     }
 
-    a{ color: inherit; }
+    /* 顶栏：PC看起来更“产品化”，但不占内容 */
     .topbar{
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 30;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       background: linear-gradient(180deg, rgba(0,0,0,.42), rgba(0,0,0,0));
@@ -76,17 +76,15 @@
         border-bottom: 1px solid rgba(0,0,0,.06);
       }
     }
-
     .topbar .inner{
       max-width: var(--page-max);
       margin: 0 auto;
-      padding: 14px 16px;
+      padding: 12px 14px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap: 12px;
     }
-
     .brand{
       display:flex;
       align-items:center;
@@ -101,7 +99,7 @@
       box-shadow: 0 10px 22px rgba(0,0,0,.22);
       flex: 0 0 auto;
     }
-    .titlewrap{ min-width:0; }
+    .brand .twrap{ min-width:0; }
     .brand h1{
       margin:0;
       font-size: 14px;
@@ -140,23 +138,14 @@
     .btn:hover{ background: rgba(255,255,255,.10); }
     .btn:active{ transform: translateY(1px); }
 
+    /* 页面容器 */
     .wrap{
       max-width: var(--page-max);
       margin: 0 auto;
-      padding: 18px 16px 28px;
+      padding: 18px 14px 28px;
     }
 
-    /* PC 双栏：左海报 + 右内容 */
-    .grid{
-      display:grid;
-      grid-template-columns: minmax(320px, var(--poster-w)) 1fr;
-      gap: 18px;
-      align-items:start;
-    }
-    @media (max-width: 980px){
-      .grid{ grid-template-columns: 1fr; }
-    }
-
+    /* 海报主卡 */
     .panel{
       border-radius: var(--radius);
       border: 1px solid var(--border);
@@ -165,34 +154,26 @@
       overflow:hidden;
     }
 
-    .poster{
-      position: sticky;
-      top: 74px;
-    }
-    @media (max-width: 980px){
-      .poster{ position: relative; top: 0; }
-    }
-
-    .posterHeader{
-      padding: 18px 18px 14px;
+    .header{
+      padding: 20px 18px 14px;
       border-bottom: 1px solid rgba(255,255,255,.06);
       display:flex;
       justify-content:space-between;
       gap: 10px;
       align-items:flex-end;
     }
-    .posterHeader .kicker{
+    .kicker{
       font-size: 12px;
       color: var(--muted);
       letter-spacing: .3px;
     }
-    .posterHeader .mainTitle{
-      margin: 6px 0 0;
-      font-size: 22px;
+    .title{
+      margin: 8px 0 0;
+      font-size: 24px;
       letter-spacing: .6px;
       line-height: 1.15;
     }
-    .posterHeader .stamp{
+    .stamp{
       font-weight: 900;
       font-size: 18px;
       padding: 10px 12px;
@@ -204,22 +185,23 @@
       flex: 0 0 auto;
     }
 
-    .posterBody{
+    .body{
       padding: 16px 18px 18px;
       display:flex;
       flex-direction:column;
       gap: 12px;
     }
 
-    .heroLine{
+    .metaLine{
       display:flex;
       justify-content:space-between;
       align-items:baseline;
       gap: 12px;
+      flex-wrap: wrap;
     }
     .nickname{
       font-weight: 800;
-      font-size: 16px;
+      font-size: 15px;
     }
     .generatedAt{
       font-size: 12px;
@@ -380,37 +362,9 @@
       border-top: 1px solid rgba(255,255,255,.06);
     }
 
-    /* 右侧：更“网页化”的阅读区 */
-    .reader{
-      padding: 18px;
-    }
-
-    .reader h2{
-      margin: 2px 0 6px;
-      font-size: 22px;
-      letter-spacing: .4px;
-    }
-    .reader .sub{
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .readerGrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    @media (max-width: 980px){
-      .readerGrid{ grid-template-columns: 1fr; }
-    }
-
-    .wide{ grid-column: 1 / -1; }
-
-    /* 状态条 */
+    /* 状态条：不替换正文，只在下方提示加载状态 */
     .status{
-      margin: 12px 0 0;
+      margin-top: 12px;
       padding: 10px 12px;
       border-radius: 14px;
       border: 1px dashed rgba(255,255,255,.18);
@@ -442,9 +396,9 @@
     <div class="inner">
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
-        <div class="titlewrap">
-          <h1 data-bind="coverTitle">举杯团圆·新春假期</h1>
-          <p>PC 友好版 · 打开链接即可分享</p>
+        <div class="twrap">
+          <h1 data-bind="coverTitle">新春假期海报</h1>
+          <p>单栏 PC 友好版 · 访问链接即可分享</p>
         </div>
       </div>
       <div class="actions">
@@ -455,112 +409,47 @@
   </header>
 
   <main class="wrap">
-    <div class="grid">
-      <!-- 左：海报卡（更像“成品”） -->
-      <section class="panel poster" aria-label="海报">
-        <div class="posterHeader">
-          <div>
-            <div class="kicker">新春假期海报</div>
-            <div class="mainTitle" data-bind="coverTitle">举杯团圆·新春假期</div>
-          </div>
-          <div class="stamp" aria-hidden="true">福</div>
+    <section class="panel" aria-label="海报">
+      <div class="header">
+        <div>
+          <div class="kicker">新春假期海报</div>
+          <h2 class="title" data-bind="coverTitle">举杯团圆·新春假期</h2>
+        </div>
+        <div class="stamp" aria-hidden="true">福</div>
+      </div>
+
+      <div class="body">
+        <div class="metaLine">
+          <div class="nickname">—— 送给 <span data-bind="nickname">你</span></div>
+          <div class="generatedAt" data-bind="generatedAtLabel"></div>
         </div>
 
-        <div class="posterBody">
-          <div class="heroLine">
-            <div class="nickname">—— 送给 <span data-bind="nickname">爱记录的你</span></div>
-            <div class="generatedAt" data-bind="generatedAtLabel">生成于 2025-12-26</div>
-          </div>
-
-          <div class="cards">
-            <section class="card" aria-label="假期活动">
-              <h3><span>假期活动</span><span class="tag">HIGHLIGHTS</span></h3>
-              <ul class="acts" data-bind="activities">
-                <li class="act"><span class="dot" aria-hidden="true"></span><p>年夜饭后和家人举杯合影，把团圆笑脸定格成全家福</p></li>
-              </ul>
-            </section>
-
-            <section aria-label="过年人格" class="card" id="personaCard">
-              <h3><span>过年人格</span><span class="tag">MBTI</span></h3>
-              <div class="persona">
-                <div class="mbti mbti--slate" data-bind="mbti">NA</div>
-                <p class="reason" data-bind="reason">
-                  （如果你看到这段，说明数据还在加载中。）
-                </p>
-              </div>
-            </section>
-
-            <section aria-label="过年关键词" class="card">
-              <h3><span>过年关键词</span><span class="tag">TOP 3</span></h3>
-              <div class="chips" data-bind="keywords">
-                <span class="chip chip--slate">团圆饭</span>
-                <span class="chip chip--slate">举杯</span>
-                <span class="chip chip--slate">全家福</span>
-              </div>
-            </section>
-
-            <section aria-label="新年寄语" class="card">
-              <h3><span>新年寄语</span><span class="tag">WISH</span></h3>
-              <p class="wish" data-bind="wish">
-                愿你把这次举杯的热闹与安心都收进口袋里，新的一年家常有光、心里有底，想见的人常相见。
-              </p>
-            </section>
-          </div>
-        </div>
-
-        <div class="foot">
-          <span data-bind="signature">AI 春节报告 · 仅供分享</span>
-          <span>链接打开后如延迟，请稍等 30～60 秒再刷新</span>
-        </div>
-      </section>
-
-      <!-- 右：阅读区（更适合 PC） -->
-      <section class="panel reader" aria-label="详情">
-        <h2>春节报告 · 详情阅读</h2>
-        <p class="sub">
-          右侧适合电脑阅读和截图分享；左侧为“海报成品”展示。
-          若 GitHub Pages 有延迟，本页会自动重试，直到成功或超时。
-        </p>
-
-        <div class="readerGrid">
-          <section class="card wide" aria-label="标题与对象">
-            <h3><span>这份海报属于</span><span class="tag">TO</span></h3>
-            <p class="wish" style="margin-top:0">
-              <b data-bind="nickname">爱记录的你</b> ·
-              <span style="color:var(--muted)">主题：</span><span data-bind="coverTitle">举杯团圆·新春假期</span>
-            </p>
+        <div class="cards">
+          <section class="card" aria-label="假期活动">
+            <h3><span>假期活动</span><span class="tag">HIGHLIGHTS</span></h3>
+            <ul class="acts" data-bind="activities">
+              <li class="act"><span class="dot" aria-hidden="true"></span><p>（加载中…）</p></li>
+            </ul>
           </section>
 
-          <section class="card" aria-label="人格解读">
-            <h3><span>人格解读</span><span class="tag">MBTI</span></h3>
+          <section aria-label="过年人格" class="card" id="personaCard">
+            <h3><span>过年人格</span><span class="tag">MBTI</span></h3>
             <div class="persona">
               <div class="mbti mbti--slate" data-bind="mbti">NA</div>
               <p class="reason" data-bind="reason">（加载中…）</p>
             </div>
           </section>
 
-          <section class="card" aria-label="关键词">
-            <h3><span>关键词</span><span class="tag">TOP 3</span></h3>
-            <div class="chips" data-bind="keywords"></div>
+          <section aria-label="过年关键词" class="card">
+            <h3><span>过年关键词</span><span class="tag">TOP 3</span></h3>
+            <div class="chips" data-bind="keywords">
+              <span class="chip chip--slate">（加载中…）</span>
+            </div>
           </section>
 
-          <section class="card wide" aria-label="活动亮点">
-            <h3><span>活动亮点</span><span class="tag">HIGHLIGHTS</span></h3>
-            <ul class="acts" data-bind="activities"></ul>
-          </section>
-
-          <section class="card wide" aria-label="新年寄语">
+          <section aria-label="新年寄语" class="card">
             <h3><span>新年寄语</span><span class="tag">WISH</span></h3>
-            <p class="wish" data-bind="wish"></p>
-          </section>
-
-          <section class="card wide" aria-label="署名">
-            <h3><span>署名与时间</span><span class="tag">META</span></h3>
-            <p class="wish" style="margin:0">
-              <span data-bind="signature">AI 春节报告 · 仅供分享</span>
-              <span style="margin:0 8px; opacity:.6">·</span>
-              <span data-bind="generatedAtLabel"></span>
-            </p>
+            <p class="wish" data-bind="wish">（加载中…）</p>
           </section>
         </div>
 
@@ -569,16 +458,23 @@
             <span class="spinner" id="spinner"></span>
             <span id="statusText">准备加载报告…</span>
           </span>
-          <span id="statusHint" style="color:var(--muted)">如果 30～60 秒后仍失败，可点右上角“重试加载”。</span>
+          <span id="statusHint" style="color:var(--muted)">
+            GitHub Pages 偶有延迟，30～60 秒后通常可自动成功
+          </span>
         </div>
-      </section>
-    </div>
+      </div>
+
+      <div class="foot">
+        <span data-bind="signature">AI 春节报告 · 仅供分享</span>
+        <span>打开链接如延迟，可稍等或点“重试加载”</span>
+      </div>
+    </section>
   </main>
 
   <script>
-    // -------------------------------
-    // 工具函数
-    // -------------------------------
+    // =========================
+    // 绑定 & 渲染（保持 JSON schema）
+    // =========================
     const $ = (s) => document.querySelector(s);
     const ALLOWED_TONES = new Set(["red","gold","green","blue","purple","slate"]);
 
@@ -598,7 +494,7 @@
       }catch{ return ""; }
     }
 
-    // ✅ 不要在数据为空时清掉占位文案（PC版体验更好）
+    // ✅ 不在空数据时清掉占位文本
     function safeBindText(key, value){
       const v = value == null ? "" : String(value);
       if (!v.trim()) return;
@@ -608,42 +504,36 @@
     }
 
     function renderActivities(list){
-      const targets = document.querySelectorAll('[data-bind="activities"]');
-      if (!targets.length) return;
+      const el = document.querySelector('[data-bind="activities"]');
+      if (!el) return;
       if (!Array.isArray(list) || list.length === 0) return;
-
-      targets.forEach(el => {
-        el.innerHTML = "";
-        list.slice(0,3).forEach(t => {
-          const li = document.createElement("li");
-          li.className = "act";
-          const dot = document.createElement("span");
-          dot.className = "dot";
-          dot.setAttribute("aria-hidden", "true");
-          const p = document.createElement("p");
-          p.textContent = String(t ?? "");
-          li.append(dot, p);
-          el.appendChild(li);
-        });
+      el.innerHTML = "";
+      list.slice(0,3).forEach(t => {
+        const li = document.createElement("li");
+        li.className = "act";
+        const dot = document.createElement("span");
+        dot.className = "dot";
+        dot.setAttribute("aria-hidden","true");
+        const p = document.createElement("p");
+        p.textContent = String(t ?? "");
+        li.append(dot, p);
+        el.appendChild(li);
       });
     }
 
     function renderKeywords(list){
-      const targets = document.querySelectorAll('[data-bind="keywords"]');
-      if (!targets.length) return;
+      const el = document.querySelector('[data-bind="keywords"]');
+      if (!el) return;
       if (!Array.isArray(list) || list.length === 0) return;
-
-      targets.forEach(el => {
-        el.innerHTML = "";
-        list.slice(0,3).forEach(item => {
-          const text = typeof item === "string" ? item : (item?.text ?? "");
-          if (!String(text).trim()) return;
-          const tone = typeof item === "string" ? "slate" : normalizeTone(item?.tone);
-          const span = document.createElement("span");
-          span.className = `chip chip--${tone}`;
-          span.textContent = String(text ?? "");
-          el.appendChild(span);
-        });
+      el.innerHTML = "";
+      list.slice(0,3).forEach(item => {
+        const text = typeof item === "string" ? item : (item?.text ?? "");
+        if (!String(text).trim()) return;
+        const tone = typeof item === "string" ? "slate" : normalizeTone(item?.tone);
+        const span = document.createElement("span");
+        span.className = `chip chip--${tone}`;
+        span.textContent = String(text ?? "");
+        el.appendChild(span);
       });
     }
 
@@ -662,7 +552,7 @@
 
     function renderMbti(mbti){
       const card = document.getElementById("personaCard");
-      const els = document.querySelectorAll('[data-bind="mbti"]');
+      const el = document.querySelector('[data-bind="mbti"]');
       const m = String(mbti || "").trim().toUpperCase();
 
       if (!m || m === "NA"){
@@ -670,13 +560,11 @@
         return;
       }
       if (card) card.classList.remove("is-hidden");
+      if (!el) return;
 
-      els.forEach(el => {
-        el.textContent = m;
-        el.classList.remove("mbti--green","mbti--purple","mbti--yellow","mbti--blue","mbti--slate");
-        const cls = mbtiColorClass(m) || "mbti--slate";
-        el.classList.add(cls);
-      });
+      el.textContent = m;
+      el.classList.remove("mbti--green","mbti--purple","mbti--yellow","mbti--blue","mbti--slate");
+      el.classList.add(mbtiColorClass(m) || "mbti--slate");
     }
 
     function render(data){
@@ -705,27 +593,19 @@
       try{
         const t = new Date(generatedAtIso).getTime();
         if (Number.isNaN(t)) return false;
-        const ageMs = Date.now() - t;
-        return ageMs > 7 * 24 * 60 * 60 * 1000;
+        return (Date.now() - t) > 7 * 24 * 60 * 60 * 1000;
       }catch{ return false; }
     }
 
-    // -------------------------------
+    // =========================
     // 稳定加载：轮询/重试（适配 30~60 秒延迟）
-    // -------------------------------
+    // =========================
     const statusText = $("#statusText");
     const spinner = $("#spinner");
-    const statusBar = $("#statusBar");
 
     function setStatus(msg, loading=true){
       if (statusText) statusText.textContent = msg;
       if (spinner) spinner.style.display = loading ? "inline-block" : "none";
-      if (statusBar) statusBar.style.opacity = "1";
-    }
-
-    function stopStatus(msg){
-      setStatus(msg, false);
-      if (statusBar) statusBar.style.opacity = ".85";
     }
 
     async function fetchJsonWithPolling(urlObj, maxWaitMs = 70_000){
@@ -736,10 +616,10 @@
       while (Date.now() - start < maxWaitMs){
         attempt++;
 
-        // cache bust：每次请求都换 _ts，最大化绕过缓存
+        // 每次请求加 _ts，尽量绕过缓存层
         urlObj.searchParams.set("_ts", Date.now().toString());
-
         const url = urlObj.toString();
+
         setStatus(`正在加载报告…（第 ${attempt} 次尝试）`, true);
 
         try{
@@ -749,21 +629,16 @@
           });
 
           const raw0 = await res.text();
-          // ✅ 去 BOM，避免 JSON.parse 偶发失败
+          // 去 BOM，避免偶发解析失败
           const raw = raw0.replace(/^\uFEFF/, "");
 
-          if (!res.ok){
-            throw new Error(`HTTP ${res.status}`);
-          }
-
-          // 直接 parse，别用 startsWith("{") 误判
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const data = JSON.parse(raw);
           return data;
         }catch(e){
           lastErr = e;
-          // 轮询间隔：2s -> 3s -> 5s -> 8s -> 8s...
           const wait = Math.min(8000, [2000,3000,5000,8000][Math.min(attempt-1,3)]);
-          setStatus(`暂未就绪，${Math.round(wait/1000)} 秒后自动重试…（${String(e)})`, true);
+          setStatus(`暂未就绪，${Math.round(wait/1000)} 秒后自动重试…`, true);
           await new Promise(r => setTimeout(r, wait));
         }
       }
@@ -771,43 +646,44 @@
       throw lastErr || new Error("timeout");
     }
 
-    async function loadOnce(){
+    async function load(){
       const id = getId();
       if (!id){
-        stopStatus("缺少参数：?id=xxx");
+        setStatus("缺少参数：?id=xxx", false);
         return;
       }
 
       const safeId = id.replace(/\.json$/i, "");
-      // 页面在 /p/，reports 在 /reports/，所以用 ../reports
+
+      // ✅ 保持你的目录结构：页面在 /p/，json 在 /reports/
+      // 用 URL 计算，避免相对路径在重定向/尾斜杠变化下不稳定
       const urlObj = new URL(`../reports/${encodeURIComponent(safeId)}.json`, location.href);
 
       try{
         const data = await fetchJsonWithPolling(urlObj, 70_000);
 
         if (isExpired(data?.generatedAt)){
-          stopStatus("链接已过期（7 天），请重新生成。");
+          setStatus("链接已过期（7 天），请重新生成。", false);
           return;
         }
 
         render(data);
-        stopStatus("加载成功 ✅（如内容更新延迟，可稍后刷新）");
+        setStatus("加载成功 ✅", false);
       }catch(e){
         console.error("加载失败：", e);
-        stopStatus("加载失败：请稍后刷新或点击“重试加载”（控制台可查看详细错误）");
+        setStatus("加载失败：请稍后刷新或点击右上角“重试加载”。", false);
       }
     }
 
-    // -------------------------------
+    // =========================
     // 顶部按钮
-    // -------------------------------
+    // =========================
     $("#btnCopy")?.addEventListener("click", async () => {
       try{
         await navigator.clipboard.writeText(location.href);
         setStatus("已复制链接 ✅", false);
-        setTimeout(()=>stopStatus("加载成功 ✅（如内容更新延迟，可稍后刷新）"), 1200);
+        setTimeout(() => setStatus("加载成功 ✅", false), 1200);
       }catch{
-        // 兼容降级
         const input = document.createElement("input");
         input.value = location.href;
         document.body.appendChild(input);
@@ -815,20 +691,19 @@
         document.execCommand("copy");
         input.remove();
         setStatus("已复制链接 ✅", false);
-        setTimeout(()=>stopStatus("加载成功 ✅（如内容更新延迟，可稍后刷新）"), 1200);
+        setTimeout(() => setStatus("加载成功 ✅", false), 1200);
       }
     });
 
-    $("#btnReload")?.addEventListener("click", () => {
-      loadOnce();
-    });
+    $("#btnReload")?.addEventListener("click", () => load());
 
     // DOM ready
     if (document.readyState === "loading"){
-      document.addEventListener("DOMContentLoaded", loadOnce);
+      document.addEventListener("DOMContentLoaded", load);
     }else{
-      loadOnce();
+      load();
     }
   </script>
 </body>
 </html>
+``
