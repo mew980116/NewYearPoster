@@ -13,6 +13,7 @@
       --bg2:#0b0b10;
 
       --card: rgba(255,255,255,.08);
+      --card2: rgba(0,0,0,.14);
       --border: rgba(255,255,255,.14);
 
       --text: rgba(255,255,255,.92);
@@ -26,13 +27,16 @@
       --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
               "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
 
+      /* 单栏宽度：PC 更好看，移动端自适应 */
       --page-max: 820px;
     }
+
     @media (prefers-color-scheme: light){
       :root{
         --bg1:#fff3ef;
         --bg2:#fff8f5;
         --card: rgba(255,255,255,.92);
+        --card2: rgba(255,255,255,.76);
         --border: rgba(20,20,28,.10);
 
         --text: rgba(15,15,20,.92);
@@ -56,6 +60,7 @@
       overflow-x:hidden;
     }
 
+    /* 顶栏：PC看起来更“产品化”，但不占内容 */
     .topbar{
       position: sticky;
       top: 0;
@@ -80,11 +85,17 @@
       justify-content:space-between;
       gap: 12px;
     }
-    .brand{ display:flex; align-items:center; gap:10px; min-width: 0; }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 0;
+    }
     .logo{
       width: 34px; height: 34px;
       border-radius: 12px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,215,0,.95), rgba(255,70,70,.85));
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,215,0,.95), rgba(255,70,70,.85));
       box-shadow: 0 10px 22px rgba(0,0,0,.22);
       flex: 0 0 auto;
     }
@@ -107,7 +118,12 @@
       text-overflow: ellipsis;
     }
 
-    .actions{ display:flex; gap:8px; align-items:center; flex: 0 0 auto; }
+    .actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex: 0 0 auto;
+    }
     .btn{
       border: 1px solid var(--border);
       background: rgba(255,255,255,.06);
@@ -121,14 +137,15 @@
     }
     .btn:hover{ background: rgba(255,255,255,.10); }
     .btn:active{ transform: translateY(1px); }
-    .btn[disabled]{ opacity: .55; cursor:not-allowed; }
 
+    /* 页面容器 */
     .wrap{
       max-width: var(--page-max);
       margin: 0 auto;
       padding: 18px 14px 28px;
     }
 
+    /* 海报主卡 */
     .panel{
       border-radius: var(--radius);
       border: 1px solid var(--border);
@@ -136,6 +153,7 @@
       box-shadow: var(--shadow);
       overflow:hidden;
     }
+
     .header{
       padding: 20px 18px 14px;
       border-bottom: 1px solid rgba(255,255,255,.06);
@@ -144,8 +162,17 @@
       gap: 10px;
       align-items:flex-end;
     }
-    .kicker{ font-size: 12px; color: var(--muted); letter-spacing: .3px; }
-    .title{ margin: 8px 0 0; font-size: 24px; letter-spacing: .6px; line-height: 1.15; }
+    .kicker{
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .3px;
+    }
+    .title{
+      margin: 8px 0 0;
+      font-size: 24px;
+      letter-spacing: .6px;
+      line-height: 1.15;
+    }
     .stamp{
       font-weight: 900;
       font-size: 18px;
@@ -158,12 +185,35 @@
       flex: 0 0 auto;
     }
 
-    .body{ padding: 16px 18px 18px; display:flex; flex-direction:column; gap: 12px; }
-    .metaLine{ display:flex; justify-content:space-between; align-items:baseline; gap: 12px; flex-wrap: wrap; }
-    .nickname{ font-weight: 800; font-size: 15px; }
-    .generatedAt{ font-size: 12px; color: var(--muted); }
+    .body{
+      padding: 16px 18px 18px;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+    }
 
-    .cards{ display:grid; grid-template-columns: 1fr; gap: 12px; }
+    .metaLine{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .nickname{
+      font-weight: 800;
+      font-size: 15px;
+    }
+    .generatedAt{
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
     .card{
       border-radius: var(--radius-sm);
       border: 1px solid rgba(255,255,255,.10);
@@ -176,6 +226,7 @@
         border: 1px solid rgba(0,0,0,.08);
       }
     }
+
     .card h3{
       margin:0 0 10px;
       font-size: 13px;
@@ -195,38 +246,95 @@
       flex: 0 0 auto;
     }
 
-    .acts{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap: 10px; }
-    .act{ display:flex; gap:10px; align-items:flex-start; }
+    .acts{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .act{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
     .dot{
-      width: 9px; height: 9px; margin-top: 6px; border-radius: 99px;
+      width: 9px; height: 9px;
+      margin-top: 6px;
+      border-radius: 99px;
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,70,70,.85));
       box-shadow: 0 10px 18px rgba(255,70,70,.18);
       flex: 0 0 auto;
     }
-    .act p{ margin:0; color: var(--text2); line-height: 1.45; font-size: 13px; word-break: break-word; }
+    .act p{
+      margin:0;
+      color: var(--text2);
+      line-height: 1.45;
+      font-size: 13px;
+      word-break: break-word;
+    }
 
-    .persona{ display:grid; grid-template-columns: 76px 1fr; gap: 12px; align-items:start; }
+    .persona{
+      display:grid;
+      grid-template-columns: 76px 1fr;
+      gap: 12px;
+      align-items:start;
+    }
     .mbti{
-      width: 76px; height: 76px; border-radius: 20px;
-      display:grid; place-items:center; font-weight: 900; letter-spacing: .6px;
+      width: 76px;
+      height: 76px;
+      border-radius: 20px;
+      display:grid;
+      place-items:center;
+      font-weight: 900;
+      letter-spacing: .6px;
       border: 1px solid rgba(255,255,255,.14);
       color: rgba(10,10,14,.92);
       box-shadow: 0 14px 28px rgba(0,0,0,.18);
       user-select: none;
     }
-    .mbti--green{ background: radial-gradient(circle at 30% 30%, rgba(146,255,191,1), rgba(52,199,89,.92)); border-color: rgba(52,199,89,.28); }
-    .mbti--purple{ background: radial-gradient(circle at 30% 30%, rgba(223,179,255,1), rgba(175,82,222,.92)); border-color: rgba(175,82,222,.28); }
-    .mbti--yellow{ background: radial-gradient(circle at 30% 30%, rgba(255,238,170,1), rgba(255,204,102,.96)); border-color: rgba(255,204,102,.32); }
-    .mbti--blue{ background: radial-gradient(circle at 30% 30%, rgba(185,220,255,1), rgba(70,140,255,.92)); border-color: rgba(70,140,255,.28); }
-    .mbti--slate{ background: radial-gradient(circle at 30% 30%, rgba(240,240,245,1), rgba(170,170,185,.92)); border-color: rgba(255,255,255,.14); }
+    .mbti--green{
+      background: radial-gradient(circle at 30% 30%, rgba(146,255,191,1), rgba(52,199,89,.92));
+      border-color: rgba(52,199,89,.28);
+    }
+    .mbti--purple{
+      background: radial-gradient(circle at 30% 30%, rgba(223,179,255,1), rgba(175,82,222,.92));
+      border-color: rgba(175,82,222,.28);
+    }
+    .mbti--yellow{
+      background: radial-gradient(circle at 30% 30%, rgba(255,238,170,1), rgba(255,204,102,.96));
+      border-color: rgba(255,204,102,.32);
+    }
+    .mbti--blue{
+      background: radial-gradient(circle at 30% 30%, rgba(185,220,255,1), rgba(70,140,255,.92));
+      border-color: rgba(70,140,255,.28);
+    }
+    .mbti--slate{
+      background: radial-gradient(circle at 30% 30%, rgba(240,240,245,1), rgba(170,170,185,.92));
+      border-color: rgba(255,255,255,.14);
+    }
 
-    .reason{ margin:0; color: var(--text2); line-height:1.5; font-size: 13px; word-break: break-word; }
+    .reason{
+      margin:0;
+      color: var(--text2);
+      line-height:1.5;
+      font-size: 13px;
+      word-break: break-word;
+    }
 
-    .chips{ display:flex; flex-wrap:wrap; gap: 8px; }
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+    }
     .chip{
-      font-size: 12px; padding: 6px 10px; border-radius: 999px;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06); color: var(--text);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
     }
     .chip--slate{ background: rgba(255,255,255,.06); }
     .chip--red{ background: rgba(255,70,70,.16); border-color: rgba(255,70,70,.24); }
@@ -235,7 +343,13 @@
     .chip--blue{ background: rgba(70,140,255,.16); border-color: rgba(70,140,255,.24); }
     .chip--purple{ background: rgba(175,82,222,.16); border-color: rgba(175,82,222,.24); }
 
-    .wish{ margin:0; color: var(--text2); line-height:1.55; font-size: 13px; word-break: break-word; }
+    .wish{
+      margin:0;
+      color: var(--text2);
+      line-height:1.55;
+      font-size: 13px;
+      word-break: break-word;
+    }
 
     .foot{
       padding: 12px 18px 18px;
@@ -248,6 +362,7 @@
       border-top: 1px solid rgba(255,255,255,.06);
     }
 
+    /* 状态条：不替换正文，只在下方提示加载状态 */
     .status{
       margin-top: 12px;
       padding: 10px 12px;
@@ -273,194 +388,6 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .is-hidden{ display:none !important; }
-
-    /* ===== 分享浮层 + 截图容器 ===== */
-    .share-overlay{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.55);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      z-index: 9999;
-      display: grid;
-      place-items: center;
-      padding: 16px;
-    }
-    .share-dialog{
-      width: min(960px, 96vw);
-      max-height: min(92vh, 900px);
-      overflow: auto;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: linear-gradient(180deg, rgba(20,20,28,.92), rgba(10,10,14,.92));
-      box-shadow: 0 22px 70px rgba(0,0,0,.45);
-    }
-    @media (prefers-color-scheme: light){
-      .share-dialog{
-        background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.90));
-        border: 1px solid rgba(0,0,0,.10);
-        box-shadow: 0 18px 56px rgba(0,0,0,.18);
-      }
-    }
-    .share-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap: 10px;
-      padding: 14px 14px 10px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    @media (prefers-color-scheme: light){
-      .share-head{ border-bottom: 1px solid rgba(0,0,0,.06); }
-    }
-    .share-title{ font-weight: 800; font-size: 14px; }
-    .share-sub{ color: rgba(255,255,255,.68); font-size: 12px; margin-top: 2px; }
-    @media (prefers-color-scheme: light){
-      .share-sub{ color: rgba(0,0,0,.56); }
-    }
-    .share-body{ padding: 12px 14px 14px; }
-    .share-loading{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px dashed rgba(255,255,255,.18);
-      background: rgba(255,255,255,.04);
-      margin-bottom: 12px;
-    }
-    .share-img{
-      width: min(460px, 92vw);
-      display:block;
-      margin: 0 auto 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: 0 18px 54px rgba(0,0,0,.35);
-      background: rgba(255,255,255,.06);
-    }
-    .share-actions{
-      display:flex;
-      gap: 8px;
-      justify-content:center;
-      flex-wrap: wrap;
-    }
-    .share-tip{
-      margin-top: 10px;
-      text-align:center;
-      font-size: 12px;
-      color: rgba(255,255,255,.62);
-    }
-    @media (prefers-color-scheme: light){
-      .share-tip{ color: rgba(0,0,0,.56); }
-    }
-
-    .capture-wrap{
-      position: fixed;
-      left: -99999px;
-      top: 0;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-    }
-    .capture-phone{
-      width: 420px;
-      background:
-        radial-gradient(900px 600px at 30% 20%, rgba(255,64,129,.18), transparent 60%),
-        radial-gradient(800px 600px at 80% 30%, rgba(99,102,241,.16), transparent 60%),
-        linear-gradient(180deg, #07070b, #0b0b10);
-      color: rgba(255,255,255,.92);
-      font-family: var(--font);
-      padding: 14px;
-      border-radius: 26px;
-    }
-    .cap-header{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap: 12px;
-      padding: 10px 10px 12px;
-      border-radius: 20px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-    }
-    .cap-kicker{ font-size: 12px; color: rgba(255,255,255,.70); }
-    .cap-title{ margin-top: 6px; font-size: 20px; font-weight: 900; letter-spacing: .5px; line-height: 1.12; }
-    .cap-stamp{
-      font-weight: 900; font-size: 18px;
-      padding: 10px 12px; border-radius: 16px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.12);
-      transform: rotate(-6deg);
-    }
-    .cap-meta{ display:flex; justify-content:space-between; gap: 10px; flex-wrap: wrap; padding: 10px 6px 6px; }
-    .cap-to{ font-weight: 800; font-size: 13px; }
-    .cap-date{ font-size: 12px; color: rgba(255,255,255,.66); }
-
-    .cap-card{
-      margin-top: 10px;
-      padding: 12px 12px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-    }
-    .cap-card-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .3px;
-      margin-bottom: 10px;
-    }
-    .cap-tag{
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.78);
-    }
-    .cap-acts{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap: 8px; }
-    .cap-acts li{ display:flex; gap: 10px; align-items:flex-start; }
-    .cap-acts .dot{
-      width: 8px; height: 8px; border-radius: 99px; margin-top: 6px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.92), rgba(255,70,70,.86));
-      flex: 0 0 auto;
-    }
-    .cap-acts p{ margin:0; font-size: 13px; line-height: 1.45; color: rgba(255,255,255,.84); }
-
-    .cap-persona{ display:grid; grid-template-columns: 72px 1fr; gap: 12px; align-items:start; }
-    .cap-mbti{
-      width: 72px; height: 72px; border-radius: 18px;
-      display:grid; place-items:center;
-      font-weight: 900; letter-spacing:.6px;
-      color: rgba(10,10,14,.92);
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: 0 12px 24px rgba(0,0,0,.22);
-    }
-    .cap-mbti--green{ background: radial-gradient(circle at 30% 30%, rgba(146,255,191,1), rgba(52,199,89,.92)); }
-    .cap-mbti--purple{ background: radial-gradient(circle at 30% 30%, rgba(223,179,255,1), rgba(175,82,222,.92)); }
-    .cap-mbti--yellow{ background: radial-gradient(circle at 30% 30%, rgba(255,238,170,1), rgba(255,204,102,.96)); }
-    .cap-mbti--blue{ background: radial-gradient(circle at 30% 30%, rgba(185,220,255,1), rgba(70,140,255,.92)); }
-    .cap-mbti--slate{ background: radial-gradient(circle at 30% 30%, rgba(240,240,245,1), rgba(170,170,185,.92)); }
-
-    .cap-reason{ font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.84); }
-    .cap-chips{ display:flex; flex-wrap: wrap; gap: 8px; }
-    .cap-chip{
-      font-size: 12px; padding: 6px 10px; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.92);
-    }
-    .cap-chip--red{ background: rgba(255,70,70,.16); border-color: rgba(255,70,70,.24); }
-    .cap-chip--gold{ background: rgba(255,204,102,.18); border-color: rgba(255,204,102,.28); }
-    .cap-chip--green{ background: rgba(52,199,89,.16); border-color: rgba(52,199,89,.24); }
-    .cap-chip--blue{ background: rgba(70,140,255,.16); border-color: rgba(70,140,255,.24); }
-    .cap-chip--purple{ background: rgba(175,82,222,.16); border-color: rgba(175,82,222,.24); }
-    .cap-chip--slate{ background: rgba(255,255,255,.06); }
-
-    .cap-wish{ font-size: 13px; line-height: 1.55; color: rgba(255,255,255,.84); }
-    .cap-foot{ margin-top: 10px; padding: 10px 6px 2px; font-size: 12px; color: rgba(255,255,255,.62); }
   </style>
 </head>
 
@@ -476,7 +403,6 @@
       </div>
       <div class="actions">
         <button class="btn" id="btnCopy">复制链接</button>
-        <button class="btn" id="btnShare">分享图片</button>
         <button class="btn" id="btnReload">重试加载</button>
       </div>
     </div>
@@ -487,7 +413,7 @@
       <div class="header">
         <div>
           <div class="kicker">新春假期海报</div>
-          <h2 class="title" data-bind="coverTitle">（加载中…）</h2>
+          <h2 class="title" data-bind="coverTitle">举杯团圆·新春假期</h2>
         </div>
         <div class="stamp" aria-hidden="true">福</div>
       </div>
@@ -533,7 +459,7 @@
             <span id="statusText">准备加载报告…</span>
           </span>
           <span id="statusHint" style="color:var(--muted)">
-            若卡住不动，现在每次请求会自动超时并重试
+            GitHub Pages 偶有延迟，30～60 秒后通常可自动成功
           </span>
         </div>
       </div>
@@ -545,102 +471,18 @@
     </section>
   </main>
 
-  <!-- 分享浮层 -->
-  <div class="share-overlay is-hidden" id="shareOverlay" aria-hidden="true">
-    <div class="share-dialog" role="dialog" aria-modal="true" aria-label="分享图片">
-      <div class="share-head">
-        <div>
-          <div class="share-title">分享图片</div>
-          <div class="share-sub">已生成手机宽度 PNG，可长按保存或点击下载</div>
-        </div>
-        <button class="btn" id="btnShareClose">关闭</button>
-      </div>
-
-      <div class="share-body">
-        <div class="share-loading" id="shareLoading">
-          <span class="spinner"></span>
-          <span id="shareLoadingText">正在生成图片…</span>
-        </div>
-
-        <img class="share-img is-hidden" id="shareImg" alt="海报PNG预览" />
-
-        <div class="share-actions">
-          <button class="btn" id="btnShareDownload" disabled>下载图片</button>
-          <button class="btn" id="btnShareCopyLink">复制分享链接</button>
-        </div>
-
-        <div class="share-tip">
-          若图片空白/缺字：请先等待页面加载成功，再点“分享图片”。
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 生成 PNG 的隐藏手机渲染区 -->
-  <div class="capture-wrap" aria-hidden="true">
-    <div class="capture-phone" id="capturePhone">
-      <div class="cap-header">
-        <div>
-          <div class="cap-kicker">新春假期海报</div>
-          <div class="cap-title" data-cap="coverTitle">（加载中…）</div>
-        </div>
-        <div class="cap-stamp" aria-hidden="true">福</div>
-      </div>
-
-      <div class="cap-meta">
-        <div class="cap-to">—— 送给 <span data-cap="nickname">你</span></div>
-        <div class="cap-date" data-cap="generatedAtLabel"></div>
-      </div>
-
-      <div class="cap-card">
-        <div class="cap-card-head">
-          <span>假期活动</span><span class="cap-tag">HIGHLIGHTS</span>
-        </div>
-        <ul class="cap-acts" data-cap="activities"></ul>
-      </div>
-
-      <div class="cap-card" id="capPersonaCard">
-        <div class="cap-card-head">
-          <span>过年人格</span><span class="cap-tag">MBTI</span>
-        </div>
-        <div class="cap-persona">
-          <div class="cap-mbti cap-mbti--slate" data-cap="mbti">NA</div>
-          <div class="cap-reason" data-cap="reason">（加载中…）</div>
-        </div>
-      </div>
-
-      <div class="cap-card">
-        <div class="cap-card-head">
-          <span>过年关键词</span><span class="cap-tag">TOP 3</span>
-        </div>
-        <div class="cap-chips" data-cap="keywords"></div>
-      </div>
-
-      <div class="cap-card">
-        <div class="cap-card-head">
-          <span>新年寄语</span><span class="cap-tag">WISH</span>
-        </div>
-        <div class="cap-wish" data-cap="wish">（加载中…）</div>
-      </div>
-
-      <div class="cap-foot">
-        <span data-cap="signature">AI 春节报告 · 仅供分享</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- html2canvas：用于把“手机渲染区”截图成 PNG -->
-
-
   <script>
+    // =========================
+    // 绑定 & 渲染（保持 JSON schema）
+    // =========================
     const $ = (s) => document.querySelector(s);
     const ALLOWED_TONES = new Set(["red","gold","green","blue","purple","slate"]);
-    window.__REPORT_DATA__ = null;
 
     function normalizeTone(tone){
       const t = String(tone || "").trim().toLowerCase();
       return ALLOWED_TONES.has(t) ? t : "slate";
     }
+
     function formatDateLabel(iso){
       try{
         const d = new Date(iso);
@@ -651,14 +493,20 @@
         return `生成于 ${y}-${m}-${day}`;
       }catch{ return ""; }
     }
+
+    // ✅ 不在空数据时清掉占位文本
     function safeBindText(key, value){
       const v = value == null ? "" : String(value);
       if (!v.trim()) return;
-      document.querySelectorAll(`[data-bind="${key}"]`).forEach(el => el.textContent = v);
+      document.querySelectorAll(`[data-bind="${key}"]`).forEach(el => {
+        el.textContent = v;
+      });
     }
+
     function renderActivities(list){
       const el = document.querySelector('[data-bind="activities"]');
-      if (!el || !Array.isArray(list) || list.length === 0) return;
+      if (!el) return;
+      if (!Array.isArray(list) || list.length === 0) return;
       el.innerHTML = "";
       list.slice(0,3).forEach(t => {
         const li = document.createElement("li");
@@ -672,9 +520,11 @@
         el.appendChild(li);
       });
     }
+
     function renderKeywords(list){
       const el = document.querySelector('[data-bind="keywords"]');
-      if (!el || !Array.isArray(list) || list.length === 0) return;
+      if (!el) return;
+      if (!Array.isArray(list) || list.length === 0) return;
       el.innerHTML = "";
       list.slice(0,3).forEach(item => {
         const text = typeof item === "string" ? item : (item?.text ?? "");
@@ -686,6 +536,7 @@
         el.appendChild(span);
       });
     }
+
     function mbtiColorClass(mbti){
       const m = String(mbti || "").trim().toUpperCase();
       const green  = new Set(["ENFJ","ENFP","INFJ","INFP"]);
@@ -698,6 +549,7 @@
       if (blue.has(m))   return "mbti--blue";
       return "mbti--slate";
     }
+
     function renderMbti(mbti){
       const card = document.getElementById("personaCard");
       const el = document.querySelector('[data-bind="mbti"]');
@@ -714,19 +566,21 @@
       el.classList.remove("mbti--green","mbti--purple","mbti--yellow","mbti--blue","mbti--slate");
       el.classList.add(mbtiColorClass(m) || "mbti--slate");
     }
+
     function render(data){
       const r = data?.report || {};
       const p = r.persona || {};
+
       safeBindText("coverTitle", r.coverTitle);
       safeBindText("nickname", r.nickname);
       safeBindText("wish", r.wish);
       safeBindText("reason", p.reason);
       safeBindText("signature", r.signature || "AI 春节报告 · 仅供分享");
       safeBindText("generatedAtLabel", formatDateLabel(data?.generatedAt));
+
       renderActivities(r.activities);
       renderKeywords(r.keywords);
       renderMbti(p.mbti);
-      window.__REPORT_DATA__ = data;
     }
 
     function getId(){
@@ -734,6 +588,7 @@
       const id = qs.get("id");
       return id ? id.trim() : "";
     }
+
     function isExpired(generatedAtIso){
       try{
         const t = new Date(generatedAtIso).getTime();
@@ -742,52 +597,48 @@
       }catch{ return false; }
     }
 
+    // =========================
+    // 稳定加载：轮询/重试（适配 30~60 秒延迟）
+    // =========================
     const statusText = $("#statusText");
     const spinner = $("#spinner");
+
     function setStatus(msg, loading=true){
       if (statusText) statusText.textContent = msg;
       if (spinner) spinner.style.display = loading ? "inline-block" : "none";
     }
 
-    // ✅ 关键修复：为每次 fetch 设置超时，避免“pending 卡死”
-    async function fetchTextWithTimeout(url, ms = 12000){
-      const ctrl = new AbortController();
-      const t = setTimeout(() => ctrl.abort(), ms);
-      try{
-        const res = await fetch(url, {
-          cache: "no-store",
-          headers: { "Cache-Control": "no-store" },
-          signal: ctrl.signal
-        });
-        const raw0 = await res.text();
-        return { res, raw0 };
-      } finally {
-        clearTimeout(t);
-      }
-    }
-
-    async function fetchJsonWithPolling(urlObj, maxWaitMs = 70000){
+    async function fetchJsonWithPolling(urlObj, maxWaitMs = 70_000){
       const start = Date.now();
       let attempt = 0;
       let lastErr = null;
 
       while (Date.now() - start < maxWaitMs){
         attempt++;
+
+        // 每次请求加 _ts，尽量绕过缓存层
         urlObj.searchParams.set("_ts", Date.now().toString());
         const url = urlObj.toString();
 
         setStatus(`正在加载报告…（第 ${attempt} 次尝试）`, true);
 
         try{
-          const { res, raw0 } = await fetchTextWithTimeout(url, 12000);
+          const res = await fetch(url, {
+            cache: "no-store",
+            headers: { "Cache-Control": "no-store" }
+          });
+
+          const raw0 = await res.text();
+          // 去 BOM，避免偶发解析失败
           const raw = raw0.replace(/^\uFEFF/, "");
 
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          return JSON.parse(raw);
+          const data = JSON.parse(raw);
+          return data;
         }catch(e){
           lastErr = e;
           const wait = Math.min(8000, [2000,3000,5000,8000][Math.min(attempt-1,3)]);
-          setStatus(`暂未就绪（${String(e).replace(/\\s+/g,' ').slice(0,60)}），${Math.round(wait/1000)} 秒后重试…`, true);
+          setStatus(`暂未就绪，${Math.round(wait/1000)} 秒后自动重试…`, true);
           await new Promise(r => setTimeout(r, wait));
         }
       }
@@ -801,24 +652,32 @@
         setStatus("缺少参数：?id=xxx", false);
         return;
       }
-      const safeId = id.replace(/\\.json$/i, "");
+
+      const safeId = id.replace(/\.json$/i, "");
+
+      // ✅ 保持你的目录结构：页面在 /p/，json 在 /reports/
+      // 用 URL 计算，避免相对路径在重定向/尾斜杠变化下不稳定
       const urlObj = new URL(`../reports/${encodeURIComponent(safeId)}.json`, location.href);
 
       try{
-        const data = await fetchJsonWithPolling(urlObj, 70000);
+        const data = await fetchJsonWithPolling(urlObj, 70_000);
+
         if (isExpired(data?.generatedAt)){
           setStatus("链接已过期（7 天），请重新生成。", false);
           return;
         }
+
         render(data);
         setStatus("加载成功 ✅", false);
       }catch(e){
         console.error("加载失败：", e);
-        setStatus("加载失败：请稍后刷新或点击“重试加载”。", false);
+        setStatus("加载失败：请稍后刷新或点击右上角“重试加载”。", false);
       }
     }
 
-    // 复制链接
+    // =========================
+    // 顶部按钮
+    // =========================
     $("#btnCopy")?.addEventListener("click", async () => {
       try{
         await navigator.clipboard.writeText(location.href);
@@ -835,224 +694,10 @@
         setTimeout(() => setStatus("加载成功 ✅", false), 1200);
       }
     });
+
     $("#btnReload")?.addEventListener("click", () => load());
 
-    // ===== 分享 PNG =====
-    const overlay = document.getElementById("shareOverlay");
-    const shareImg = document.getElementById("shareImg");
-    const shareLoading = document.getElementById("shareLoading");
-    const shareLoadingText = document.getElementById("shareLoadingText");
-    const btnDownload = document.getElementById("btnShareDownload");
-    let lastObjectUrl = null;
-
-    
-function loadScript(url, timeoutMs = 12000){
-  return new Promise((resolve, reject) => {
-    const s = document.createElement("script");
-    s.src = url;
-    s.async = true;
-
-    const timer = setTimeout(() => {
-      s.remove();
-      reject(new Error("script timeout: " + url));
-    }, timeoutMs);
-
-    s.onload = () => {
-      clearTimeout(timer);
-      resolve();
-    };
-    s.onerror = () => {
-      clearTimeout(timer);
-      s.remove();
-      reject(new Error("script error: " + url));
-    };
-
-    document.head.appendChild(s);
-  });
-}
-
-async function ensureHtml2canvas(){
-  if (typeof window.html2canvas === "function") return;
-
-  const urls = [
-    // Cloudflare cdnjs（常用稳定源）[3](https://docs.pingcode.com/baike/3854248)
-    "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js",
-    // BootCDN（国内通常更稳）[4](https://www.bootcdn.cn/html2canvas/)
-    "https://cdn.bootcdn.net/ajax/libs/html2canvas/1.4.1/html2canvas.min.js",
-    // unpkg（npm 直出，作为兜底）[3](https://docs.pingcode.com/baike/3854248)
-    "https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js",
-    // fastly.jsdelivr（比 cdn.jsdelivr.net 在部分地区更可用的替代域）[1](https://github.com/jsdelivr/jsdelivr/issues/18397)[5](https://www.cnblogs.com/HGNET/p/18638180)
-    "https://fastly.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
-    // （可选）本地自托管兜底（见 B 方案）
-    "./vendor/html2canvas.min.js"
-  ];
-
-  let lastErr = null;
-  for (const u of urls){
-    try{
-      await loadScript(u, 12000);
-      if (typeof window.html2canvas === "function") return;
-    }catch(e){
-      lastErr = e;
-    }
-  }
-  throw lastErr || new Error("html2canvas load failed");
-}
-
-    function openOverlay(){
-      overlay?.classList.remove("is-hidden");
-      overlay?.setAttribute("aria-hidden","false");
-      document.body.style.overflow = "hidden";
-    }
-    function closeOverlay(){
-      overlay?.classList.add("is-hidden");
-      overlay?.setAttribute("aria-hidden","true");
-      document.body.style.overflow = "";
-      if (lastObjectUrl){
-        URL.revokeObjectURL(lastObjectUrl);
-        lastObjectUrl = null;
-      }
-    }
-    overlay?.addEventListener("click", (e) => { if (e.target === overlay) closeOverlay(); });
-    document.getElementById("btnShareClose")?.addEventListener("click", closeOverlay);
-
-    function capSetText(key, value){
-      const v = value == null ? "" : String(value);
-      document.querySelectorAll(`[data-cap="${key}"]`).forEach(el => el.textContent = v);
-    }
-    function capRenderActivities(list){
-      const el = document.querySelector('[data-cap="activities"]');
-      if (!el) return;
-      el.innerHTML = "";
-      (list || []).slice(0,3).forEach(t => {
-        const li = document.createElement("li");
-        const dot = document.createElement("span");
-        dot.className = "dot";
-        const p = document.createElement("p");
-        p.textContent = String(t ?? "");
-        li.append(dot, p);
-        el.appendChild(li);
-      });
-    }
-    function capRenderKeywords(list){
-      const el = document.querySelector('[data-cap="keywords"]');
-      if (!el) return;
-      el.innerHTML = "";
-      (list || []).slice(0,3).forEach(item => {
-        const text = typeof item === "string" ? item : (item?.text ?? "");
-        const tone = typeof item === "string" ? "slate" : normalizeTone(item?.tone);
-        const span = document.createElement("span");
-        span.className = `cap-chip cap-chip--${tone}`;
-        span.textContent = String(text ?? "");
-        el.appendChild(span);
-      });
-    }
-    function capMbtiColorClass(mbti){
-      const m = String(mbti || "").trim().toUpperCase();
-      const green  = new Set(["ENFJ","ENFP","INFJ","INFP"]);
-      const purple = new Set(["ENTJ","ENTP","INTJ","INTP"]);
-      const yellow = new Set(["ESFP","ESTP","ISFP","ISTP"]);
-      const blue   = new Set(["ESFJ","ESTJ","ISFJ","ISTJ"]);
-      if (green.has(m))  return "cap-mbti--green";
-      if (purple.has(m)) return "cap-mbti--purple";
-      if (yellow.has(m)) return "cap-mbti--yellow";
-      if (blue.has(m))   return "cap-mbti--blue";
-      return "cap-mbti--slate";
-    }
-    function capRenderMbti(mbti){
-      const card = document.getElementById("capPersonaCard");
-      const el = document.querySelector('[data-cap="mbti"]');
-      const m = String(mbti || "").trim().toUpperCase();
-
-      if (!m || m === "NA"){
-        if (card) card.classList.add("is-hidden");
-        return;
-      }
-      if (card) card.classList.remove("is-hidden");
-      if (!el) return;
-
-      el.textContent = m;
-      el.classList.remove("cap-mbti--green","cap-mbti--purple","cap-mbti--yellow","cap-mbti--blue","cap-mbti--slate");
-      el.classList.add(capMbtiColorClass(m));
-    }
-    function capRender(data){
-      const r = data?.report || {};
-      const p = r.persona || {};
-      capSetText("coverTitle", r.coverTitle ?? "");
-      capSetText("nickname", r.nickname ?? "");
-      capSetText("wish", r.wish ?? "");
-      capSetText("reason", p.reason ?? "");
-      capSetText("signature", r.signature ?? "AI 春节报告 · 仅供分享");
-      capSetText("generatedAtLabel", formatDateLabel(data?.generatedAt));
-      capRenderActivities(r.activities);
-      capRenderKeywords(r.keywords);
-      capRenderMbti(p.mbti);
-    }
-
-    async function generateSharePng(){
-      const data = window.__REPORT_DATA__;
-      if (!data){
-        setStatus("请先等待加载成功，再分享图片。", false);
-        return;
-      }
-
-try{
-  await ensureHtml2canvas();
-}catch(e){
-  console.error("html2canvas 加载失败：", e);
-  alert("图片生成组件加载失败（网络原因）。请
-
-
-      openOverlay();
-      shareImg.classList.add("is-hidden");
-      shareLoading.classList.remove("is-hidden");
-      btnDownload.disabled = true;
-      shareLoadingText.textContent = "正在生成图片…";
-
-      capRender(data);
-      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-
-      const node = document.getElementById("capturePhone");
-      const canvas = await html2canvas(node, { backgroundColor: null, scale: 2, useCORS: true });
-      const dataUrl = canvas.toDataURL("image/png");
-      shareImg.src = dataUrl;
-
-      const blob = await (await fetch(dataUrl)).blob();
-      const objUrl = URL.createObjectURL(blob);
-      if (lastObjectUrl) URL.revokeObjectURL(lastObjectUrl);
-      lastObjectUrl = objUrl;
-
-      btnDownload.disabled = false;
-      btnDownload.onclick = () => {
-        const a = document.createElement("a");
-        a.href = objUrl;
-        const nick = (data?.report?.nickname || "poster").toString().trim();
-        a.download = `NewYearPoster_${nick}.png`;
-        a.click();
-      };
-
-      shareLoading.classList.add("is-hidden");
-      shareImg.classList.remove("is-hidden");
-      shareLoadingText.textContent = "生成完成 ✅";
-    }
-
-    $("#btnShare")?.addEventListener("click", generateSharePng);
-    document.getElementById("btnShareCopyLink")?.addEventListener("click", async () => {
-      try{
-        await navigator.clipboard.writeText(location.href);
-        shareLoadingText.textContent = "链接已复制 ✅";
-      }catch{
-        const input = document.createElement("input");
-        input.value = location.href;
-        document.body.appendChild(input);
-        input.select();
-        document.execCommand("copy");
-        input.remove();
-        shareLoadingText.textContent = "链接已复制 ✅";
-      }
-    });
-
-    // 启动
+    // DOM ready
     if (document.readyState === "loading"){
       document.addEventListener("DOMContentLoaded", load);
     }else{
@@ -1061,3 +706,4 @@ try{
   </script>
 </body>
 </html>
+``
