@@ -60,7 +60,7 @@
       overflow-x:hidden;
     }
 
-    /* 顶栏：PC看起来更“产品化”，但不占内容 */
+    /* 顶栏 */
     .topbar{
       position: sticky;
       top: 0;
@@ -137,6 +137,10 @@
     }
     .btn:hover{ background: rgba(255,255,255,.10); }
     .btn:active{ transform: translateY(1px); }
+    .btn[disabled]{
+      opacity: .55;
+      cursor:not-allowed;
+    }
 
     /* 页面容器 */
     .wrap{
@@ -362,7 +366,7 @@
       border-top: 1px solid rgba(255,255,255,.06);
     }
 
-    /* 状态条：不替换正文，只在下方提示加载状态 */
+    /* 状态条：不替换正文，只提示加载状态 */
     .status{
       margin-top: 12px;
       padding: 10px 12px;
@@ -377,6 +381,8 @@
       justify-content:space-between;
       flex-wrap: wrap;
     }
+
+    /* 复用 spinner */
     .spinner{
       width: 14px; height: 14px;
       border-radius: 999px;
@@ -388,6 +394,220 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .is-hidden{ display:none !important; }
+
+    /* =========================
+       分享浮层 + 截图容器
+       ========================= */
+
+    .share-overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+    }
+    .share-dialog{
+      width: min(960px, 96vw);
+      max-height: min(92vh, 900px);
+      overflow: auto;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(20,20,28,.92), rgba(10,10,14,.92));
+      box-shadow: 0 22px 70px rgba(0,0,0,.45);
+    }
+    @media (prefers-color-scheme: light){
+      .share-dialog{
+        background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.90));
+        border: 1px solid rgba(0,0,0,.10);
+        box-shadow: 0 18px 56px rgba(0,0,0,.18);
+      }
+    }
+    .share-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap: 10px;
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    @media (prefers-color-scheme: light){
+      .share-head{ border-bottom: 1px solid rgba(0,0,0,.06); }
+    }
+    .share-title{ font-weight: 800; font-size: 14px; }
+    .share-sub{ color: rgba(255,255,255,.68); font-size: 12px; margin-top: 2px; }
+    @media (prefers-color-scheme: light){
+      .share-sub{ color: rgba(0,0,0,.56); }
+    }
+    .share-body{ padding: 12px 14px 14px; }
+    .share-loading{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,.18);
+      background: rgba(255,255,255,.04);
+      margin-bottom: 12px;
+    }
+    .share-img{
+      width: min(460px, 92vw);
+      display:block;
+      margin: 0 auto 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 18px 54px rgba(0,0,0,.35);
+      background: rgba(255,255,255,.06);
+    }
+    .share-actions{
+      display:flex;
+      gap: 8px;
+      justify-content:center;
+      flex-wrap: wrap;
+    }
+    .share-tip{
+      margin-top: 10px;
+      text-align:center;
+      font-size: 12px;
+      color: rgba(255,255,255,.62);
+    }
+    @media (prefers-color-scheme: light){
+      .share-tip{ color: rgba(0,0,0,.56); }
+    }
+
+    /* 截图容器（隐藏） */
+    .capture-wrap{
+      position: fixed;
+      left: -99999px;
+      top: 0;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    /* 手机宽度（可改 375/390/420） */
+    .capture-phone{
+      width: 420px;
+      background:
+        radial-gradient(900px 600px at 30% 20%, rgba(255,64,129,.18), transparent 60%),
+        radial-gradient(800px 600px at 80% 30%, rgba(99,102,241,.16), transparent 60%),
+        linear-gradient(180deg, #07070b, #0b0b10);
+      color: rgba(255,255,255,.92);
+      font-family: var(--font);
+      padding: 14px;
+      border-radius: 26px;
+    }
+
+    .cap-header{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 10px 10px 12px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .cap-kicker{ font-size: 12px; color: rgba(255,255,255,.70); }
+    .cap-title{ margin-top: 6px; font-size: 20px; font-weight: 900; letter-spacing: .5px; line-height: 1.12; }
+    .cap-stamp{
+      font-weight: 900;
+      font-size: 18px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      transform: rotate(-6deg);
+    }
+
+    .cap-meta{
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 10px 6px 6px;
+    }
+    .cap-to{ font-weight: 800; font-size: 13px; }
+    .cap-date{ font-size: 12px; color: rgba(255,255,255,.66); }
+
+    .cap-card{
+      margin-top: 10px;
+      padding: 12px 12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .cap-card-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .3px;
+      margin-bottom: 10px;
+    }
+    .cap-tag{
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.78);
+    }
+
+    .cap-acts{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap: 8px; }
+    .cap-acts li{ display:flex; gap: 10px; align-items:flex-start; }
+    .cap-acts .dot{
+      width: 8px; height: 8px; border-radius: 99px; margin-top: 6px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.92), rgba(255,70,70,.86));
+      flex: 0 0 auto;
+    }
+    .cap-acts p{ margin:0; font-size: 13px; line-height: 1.45; color: rgba(255,255,255,.84); }
+
+    .cap-persona{ display:grid; grid-template-columns: 72px 1fr; gap: 12px; align-items:start; }
+    .cap-mbti{
+      width: 72px; height: 72px; border-radius: 18px;
+      display:grid; place-items:center;
+      font-weight: 900; letter-spacing:.6px;
+      color: rgba(10,10,14,.92);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 12px 24px rgba(0,0,0,.22);
+    }
+    .cap-mbti--green{ background: radial-gradient(circle at 30% 30%, rgba(146,255,191,1), rgba(52,199,89,.92)); }
+    .cap-mbti--purple{ background: radial-gradient(circle at 30% 30%, rgba(223,179,255,1), rgba(175,82,222,.92)); }
+    .cap-mbti--yellow{ background: radial-gradient(circle at 30% 30%, rgba(255,238,170,1), rgba(255,204,102,.96)); }
+    .cap-mbti--blue{ background: radial-gradient(circle at 30% 30%, rgba(185,220,255,1), rgba(70,140,255,.92)); }
+    .cap-mbti--slate{ background: radial-gradient(circle at 30% 30%, rgba(240,240,245,1), rgba(170,170,185,.92)); }
+
+    .cap-reason{ font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.84); }
+
+    .cap-chips{ display:flex; flex-wrap: wrap; gap: 8px; }
+    .cap-chip{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.92);
+    }
+    .cap-chip--red{ background: rgba(255,70,70,.16); border-color: rgba(255,70,70,.24); }
+    .cap-chip--gold{ background: rgba(255,204,102,.18); border-color: rgba(255,204,102,.28); }
+    .cap-chip--green{ background: rgba(52,199,89,.16); border-color: rgba(52,199,89,.24); }
+    .cap-chip--blue{ background: rgba(70,140,255,.16); border-color: rgba(70,140,255,.24); }
+    .cap-chip--purple{ background: rgba(175,82,222,.16); border-color: rgba(175,82,222,.24); }
+    .cap-chip--slate{ background: rgba(255,255,255,.06); }
+
+    .cap-wish{ font-size: 13px; line-height: 1.55; color: rgba(255,255,255,.84); }
+
+    .cap-foot{
+      margin-top: 10px;
+      padding: 10px 6px 2px;
+      font-size: 12px;
+      color: rgba(255,255,255,.62);
+    }
   </style>
 </head>
 
@@ -403,6 +623,7 @@
       </div>
       <div class="actions">
         <button class="btn" id="btnCopy">复制链接</button>
+        <button class="btn" id="btnShare">分享图片</button>
         <button class="btn" id="btnReload">重试加载</button>
       </div>
     </div>
@@ -413,7 +634,7 @@
       <div class="header">
         <div>
           <div class="kicker">新春假期海报</div>
-          <h2 class="title" data-bind="coverTitle">举杯团圆·新春假期</h2>
+          <h2 class="title" data-bind="coverTitle">（加载中…）</h2>
         </div>
         <div class="stamp" aria-hidden="true">福</div>
       </div>
@@ -471,12 +692,102 @@
     </section>
   </main>
 
+  <!-- 分享浮层 -->
+  <div class="share-overlay is-hidden" id="shareOverlay" aria-hidden="true">
+    <div class="share-dialog" role="dialog" aria-modal="true" aria-label="分享图片">
+      <div class="share-head">
+        <div>
+          <div class="share-title">分享图片</div>
+          <div class="share-sub">已生成手机宽度 PNG，可长按保存或点击下载</div>
+        </div>
+        <button class="btn" id="btnShareClose">关闭</button>
+      </div>
+
+      <div class="share-body">
+        <div class="share-loading" id="shareLoading">
+          <span class="spinner"></span>
+          <span id="shareLoadingText">正在生成图片…</span>
+        </div>
+
+        <img class="share-img is-hidden" id="shareImg" alt="海报PNG预览" />
+
+        <div class="share-actions">
+          <button class="btn" id="btnShareDownload" disabled>下载图片</button>
+          <button class="btn" id="btnShareCopyLink">复制分享链接</button>
+        </div>
+
+        <div class="share-tip">
+          若图片空白/缺字：请先等待页面加载成功，再点“分享图片”。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 生成 PNG 的隐藏手机渲染区 -->
+  <div class="capture-wrap" aria-hidden="true">
+    <div class="capture-phone" id="capturePhone">
+      <div class="cap-header">
+        <div>
+          <div class="cap-kicker">新春假期海报</div>
+          <div class="cap-title" data-cap="coverTitle">（加载中…）</div>
+        </div>
+        <div class="cap-stamp" aria-hidden="true">福</div>
+      </div>
+
+      <div class="cap-meta">
+        <div class="cap-to">—— 送给 <span data-cap="nickname">你</span></div>
+        <div class="cap-date" data-cap="generatedAtLabel"></div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-card-head">
+          <span>假期活动</span><span class="cap-tag">HIGHLIGHTS</span>
+        </div>
+        <ul class="cap-acts" data-cap="activities"></ul>
+      </div>
+
+      <div class="cap-card" id="capPersonaCard">
+        <div class="cap-card-head">
+          <span>过年人格</span><span class="cap-tag">MBTI</span>
+        </div>
+        <div class="cap-persona">
+          <div class="cap-mbti cap-mbti--slate" data-cap="mbti">NA</div>
+          <div class="cap-reason" data-cap="reason">（加载中…）</div>
+        </div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-card-head">
+          <span>过年关键词</span><span class="cap-tag">TOP 3</span>
+        </div>
+        <div class="cap-chips" data-cap="keywords"></div>
+      </div>
+
+      <div class="cap-card">
+        <div class="cap-card-head">
+          <span>新年寄语</span><span class="cap-tag">WISH</span>
+        </div>
+        <div class="cap-wish" data-cap="wish">（加载中…）</div>
+      </div>
+
+      <div class="cap-foot">
+        <span data-cap="signature">AI 春节报告 · 仅供分享</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- html2canvas：用于把“手机渲染区”截图成 PNG -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4canvas.min.js</script>
+
   <script>
     // =========================
-    // 绑定 & 渲染（保持 JSON schema）
+    // 主页面渲染（保持 JSON schema）
     // =========================
     const $ = (s) => document.querySelector(s);
     const ALLOWED_TONES = new Set(["red","gold","green","blue","purple","slate"]);
+
+    // 当前加载到的数据（分享 PNG 用）
+    window.__REPORT_DATA__ = null;
 
     function normalizeTone(tone){
       const t = String(tone || "").trim().toLowerCase();
@@ -581,6 +892,9 @@
       renderActivities(r.activities);
       renderKeywords(r.keywords);
       renderMbti(p.mbti);
+
+      // 供分享 PNG 使用
+      window.__REPORT_DATA__ = data;
     }
 
     function getId(){
@@ -655,8 +969,7 @@
 
       const safeId = id.replace(/\.json$/i, "");
 
-      // ✅ 保持你的目录结构：页面在 /p/，json 在 /reports/
-      // 用 URL 计算，避免相对路径在重定向/尾斜杠变化下不稳定
+      // 页面在 /p/，json 在 /reports/：用 URL 计算更稳
       const urlObj = new URL(`../reports/${encodeURIComponent(safeId)}.json`, location.href);
 
       try{
@@ -671,12 +984,12 @@
         setStatus("加载成功 ✅", false);
       }catch(e){
         console.error("加载失败：", e);
-        setStatus("加载失败：请稍后刷新或点击右上角“重试加载”。", false);
+        setStatus("加载失败：请稍后刷新或点击“重试加载”。", false);
       }
     }
 
     // =========================
-    // 顶部按钮
+    // 顶部按钮：复制 / 重试
     // =========================
     $("#btnCopy")?.addEventListener("click", async () => {
       try{
@@ -697,6 +1010,191 @@
 
     $("#btnReload")?.addEventListener("click", () => load());
 
+    // =========================
+    // 分享图片：渲染手机容器 -> html2canvas -> PNG预览+下载
+    // =========================
+    const overlay = document.getElementById("shareOverlay");
+    const shareImg = document.getElementById("shareImg");
+    const shareLoading = document.getElementById("shareLoading");
+    const shareLoadingText = document.getElementById("shareLoadingText");
+    const btnDownload = document.getElementById("btnShareDownload");
+    let lastObjectUrl = null;
+
+    function openOverlay(){
+      overlay?.classList.remove("is-hidden");
+      overlay?.setAttribute("aria-hidden","false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeOverlay(){
+      overlay?.classList.add("is-hidden");
+      overlay?.setAttribute("aria-hidden","true");
+      document.body.style.overflow = "";
+      if (lastObjectUrl){
+        URL.revokeObjectURL(lastObjectUrl);
+        lastObjectUrl = null;
+      }
+    }
+    overlay?.addEventListener("click", (e) => {
+      if (e.target === overlay) closeOverlay();
+    });
+    document.getElementById("btnShareClose")?.addEventListener("click", closeOverlay);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && overlay && !overlay.classList.contains("is-hidden")) closeOverlay();
+    });
+
+    function capSetText(key, value){
+      const v = value == null ? "" : String(value);
+      document.querySelectorAll(`[data-cap="${key}"]`).forEach(el => {
+        el.textContent = v;
+      });
+    }
+    function capRenderActivities(list){
+      const el = document.querySelector('[data-cap="activities"]');
+      if (!el) return;
+      el.innerHTML = "";
+      (list || []).slice(0,3).forEach(t => {
+        const li = document.createElement("li");
+        const dot = document.createElement("span");
+        dot.className = "dot";
+        const p = document.createElement("p");
+        p.textContent = String(t ?? "");
+        li.append(dot, p);
+        el.appendChild(li);
+      });
+    }
+    function capRenderKeywords(list){
+      const el = document.querySelector('[data-cap="keywords"]');
+      if (!el) return;
+      el.innerHTML = "";
+      (list || []).slice(0,3).forEach(item => {
+        const text = typeof item === "string" ? item : (item?.text ?? "");
+        const tone = typeof item === "string" ? "slate" : normalizeTone(item?.tone);
+        const span = document.createElement("span");
+        span.className = `cap-chip cap-chip--${tone}`;
+        span.textContent = String(text ?? "");
+        el.appendChild(span);
+      });
+    }
+    function capMbtiColorClass(mbti){
+      const m = String(mbti || "").trim().toUpperCase();
+      const green  = new Set(["ENFJ","ENFP","INFJ","INFP"]);
+      const purple = new Set(["ENTJ","ENTP","INTJ","INTP"]);
+      const yellow = new Set(["ESFP","ESTP","ISFP","ISTP"]);
+      const blue   = new Set(["ESFJ","ESTJ","ISFJ","ISTJ"]);
+      if (green.has(m))  return "cap-mbti--green";
+      if (purple.has(m)) return "cap-mbti--purple";
+      if (yellow.has(m)) return "cap-mbti--yellow";
+      if (blue.has(m))   return "cap-mbti--blue";
+      return "cap-mbti--slate";
+    }
+    function capRenderMbti(mbti){
+      const card = document.getElementById("capPersonaCard");
+      const el = document.querySelector('[data-cap="mbti"]');
+      const m = String(mbti || "").trim().toUpperCase();
+
+      if (!m || m === "NA"){
+        if (card) card.classList.add("is-hidden");
+        return;
+      }
+      if (card) card.classList.remove("is-hidden");
+      if (!el) return;
+
+      el.textContent = m;
+      el.classList.remove("cap-mbti--green","cap-mbti--purple","cap-mbti--yellow","cap-mbti--blue","cap-mbti--slate");
+      el.classList.add(capMbtiColorClass(m));
+    }
+    function capRender(data){
+      const r = data?.report || {};
+      const p = r.persona || {};
+
+      capSetText("coverTitle", r.coverTitle ?? "");
+      capSetText("nickname", r.nickname ?? "");
+      capSetText("wish", r.wish ?? "");
+      capSetText("reason", p.reason ?? "");
+      capSetText("signature", r.signature ?? "AI 春节报告 · 仅供分享");
+      capSetText("generatedAtLabel", formatDateLabel(data?.generatedAt));
+
+      capRenderActivities(r.activities);
+      capRenderKeywords(r.keywords);
+      capRenderMbti(p.mbti);
+    }
+
+    async function generateSharePng(){
+      const data = window.__REPORT_DATA__;
+      if (!data){
+        setStatus("请先等待加载成功，再分享图片。", false);
+        return;
+      }
+
+      // 基础校验：如果 html2canvas 没加载到（CDN异常），给提示
+      if (typeof html2canvas !== "function"){
+        alert("图片生成组件加载失败（html2canvas）。请稍后刷新重试。");
+        return;
+      }
+
+      openOverlay();
+      shareImg.classList.add("is-hidden");
+      shareLoading.classList.remove("is-hidden");
+      btnDownload.disabled = true;
+      shareLoadingText.textContent = "正在生成图片…";
+
+      // 渲染到隐藏手机容器
+      capRender(data);
+
+      // 等待两帧，确保样式应用完成
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+      const node = document.getElementById("capturePhone");
+
+      // 生成 PNG
+      const canvas = await html2canvas(node, {
+        backgroundColor: null,
+        scale: 2,
+        useCORS: true
+      });
+
+      const dataUrl = canvas.toDataURL("image/png");
+      shareImg.src = dataUrl;
+
+      // 生成可下载的 blob URL（比 dataUrl 更稳）
+      const blob = await (await fetch(dataUrl)).blob();
+      const objUrl = URL.createObjectURL(blob);
+
+      // 清理旧的 URL
+      if (lastObjectUrl) URL.revokeObjectURL(lastObjectUrl);
+      lastObjectUrl = objUrl;
+
+      btnDownload.disabled = false;
+      btnDownload.onclick = () => {
+        const a = document.createElement("a");
+        a.href = objUrl;
+        const nick = (data?.report?.nickname || "poster").toString().trim();
+        a.download = `NewYearPoster_${nick}.png`;
+        a.click();
+      };
+
+      shareLoading.classList.add("is-hidden");
+      shareImg.classList.remove("is-hidden");
+      shareLoadingText.textContent = "生成完成 ✅";
+    }
+
+    $("#btnShare")?.addEventListener("click", generateSharePng);
+
+    document.getElementById("btnShareCopyLink")?.addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(location.href);
+        shareLoadingText.textContent = "链接已复制 ✅";
+      }catch{
+        const input = document.createElement("input");
+        input.value = location.href;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        input.remove();
+        shareLoadingText.textContent = "链接已复制 ✅";
+      }
+    });
+
     // DOM ready
     if (document.readyState === "loading"){
       document.addEventListener("DOMContentLoaded", load);
@@ -706,4 +1204,3 @@
   </script>
 </body>
 </html>
-``
