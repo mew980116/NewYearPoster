@@ -1,0 +1,834 @@
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>新春假期海报（PC版）</title>
+
+  <meta name="color-scheme" content="dark light">
+  <style>
+    :root{
+      --bg1:#07070b;
+      --bg2:#0b0b10;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(0,0,0,.14);
+      --border: rgba(255,255,255,.14);
+
+      --text: rgba(255,255,255,.92);
+      --text2: rgba(255,255,255,.78);
+      --muted: rgba(255,255,255,.62);
+
+      --radius: 22px;
+      --radius-sm: 16px;
+      --shadow: 0 18px 46px rgba(0,0,0,.40);
+
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+              "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+
+      /* PC 尺寸 */
+      --page-max: 1100px;
+      --poster-w: 520px;
+    }
+
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg1:#fff3ef;
+        --bg2:#fff8f5;
+        --card: rgba(255,255,255,.92);
+        --card2: rgba(255,255,255,.76);
+        --border: rgba(20,20,28,.10);
+
+        --text: rgba(15,15,20,.92);
+        --text2: rgba(15,15,20,.76);
+        --muted: rgba(15,15,20,.56);
+        --shadow: 0 18px 46px rgba(0,0,0,.12);
+      }
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 10%, rgba(255,64,129,.18), transparent 60%),
+        radial-gradient(900px 600px at 80% 20%, rgba(99,102,241,.16), transparent 60%),
+        radial-gradient(900px 700px at 30% 80%, rgba(34,197,94,.14), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    a{ color: inherit; }
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(0,0,0,.42), rgba(0,0,0,0));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    @media (prefers-color-scheme: light){
+      .topbar{
+        background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,0));
+        border-bottom: 1px solid rgba(0,0,0,.06);
+      }
+    }
+
+    .topbar .inner{
+      max-width: var(--page-max);
+      margin: 0 auto;
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 0;
+    }
+    .logo{
+      width: 34px; height: 34px;
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,215,0,.95), rgba(255,70,70,.85));
+      box-shadow: 0 10px 22px rgba(0,0,0,.22);
+      flex: 0 0 auto;
+    }
+    .titlewrap{ min-width:0; }
+    .brand h1{
+      margin:0;
+      font-size: 14px;
+      letter-spacing: .4px;
+      line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .brand p{
+      margin:2px 0 0 0;
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex: 0 0 auto;
+    }
+    .btn{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding: 9px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      cursor: pointer;
+      user-select:none;
+      transition: transform .08s ease, background .2s ease;
+    }
+    .btn:hover{ background: rgba(255,255,255,.10); }
+    .btn:active{ transform: translateY(1px); }
+
+    .wrap{
+      max-width: var(--page-max);
+      margin: 0 auto;
+      padding: 18px 16px 28px;
+    }
+
+    /* PC 双栏：左海报 + 右内容 */
+    .grid{
+      display:grid;
+      grid-template-columns: minmax(320px, var(--poster-w)) 1fr;
+      gap: 18px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .panel{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .poster{
+      position: sticky;
+      top: 74px;
+    }
+    @media (max-width: 980px){
+      .poster{ position: relative; top: 0; }
+    }
+
+    .posterHeader{
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      align-items:flex-end;
+    }
+    .posterHeader .kicker{
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .3px;
+    }
+    .posterHeader .mainTitle{
+      margin: 6px 0 0;
+      font-size: 22px;
+      letter-spacing: .6px;
+      line-height: 1.15;
+    }
+    .posterHeader .stamp{
+      font-weight: 900;
+      font-size: 18px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      transform: rotate(-6deg);
+      box-shadow: 0 18px 32px rgba(0,0,0,.18);
+      flex: 0 0 auto;
+    }
+
+    .posterBody{
+      padding: 16px 18px 18px;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+    }
+
+    .heroLine{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      gap: 12px;
+    }
+    .nickname{
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .generatedAt{
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .card{
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(0,0,0,.08));
+      padding: 14px 14px;
+    }
+    @media (prefers-color-scheme: light){
+      .card{
+        background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.76));
+        border: 1px solid rgba(0,0,0,.08);
+      }
+    }
+
+    .card h3{
+      margin:0 0 10px;
+      font-size: 13px;
+      letter-spacing: .4px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+    }
+    .tag{
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--text2);
+      background: rgba(255,255,255,.06);
+      flex: 0 0 auto;
+    }
+
+    .acts{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .act{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .dot{
+      width: 9px; height: 9px;
+      margin-top: 6px;
+      border-radius: 99px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,70,70,.85));
+      box-shadow: 0 10px 18px rgba(255,70,70,.18);
+      flex: 0 0 auto;
+    }
+    .act p{
+      margin:0;
+      color: var(--text2);
+      line-height: 1.45;
+      font-size: 13px;
+      word-break: break-word;
+    }
+
+    .persona{
+      display:grid;
+      grid-template-columns: 76px 1fr;
+      gap: 12px;
+      align-items:start;
+    }
+    .mbti{
+      width: 76px;
+      height: 76px;
+      border-radius: 20px;
+      display:grid;
+      place-items:center;
+      font-weight: 900;
+      letter-spacing: .6px;
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(10,10,14,.92);
+      box-shadow: 0 14px 28px rgba(0,0,0,.18);
+      user-select: none;
+    }
+    .mbti--green{
+      background: radial-gradient(circle at 30% 30%, rgba(146,255,191,1), rgba(52,199,89,.92));
+      border-color: rgba(52,199,89,.28);
+    }
+    .mbti--purple{
+      background: radial-gradient(circle at 30% 30%, rgba(223,179,255,1), rgba(175,82,222,.92));
+      border-color: rgba(175,82,222,.28);
+    }
+    .mbti--yellow{
+      background: radial-gradient(circle at 30% 30%, rgba(255,238,170,1), rgba(255,204,102,.96));
+      border-color: rgba(255,204,102,.32);
+    }
+    .mbti--blue{
+      background: radial-gradient(circle at 30% 30%, rgba(185,220,255,1), rgba(70,140,255,.92));
+      border-color: rgba(70,140,255,.28);
+    }
+    .mbti--slate{
+      background: radial-gradient(circle at 30% 30%, rgba(240,240,245,1), rgba(170,170,185,.92));
+      border-color: rgba(255,255,255,.14);
+    }
+
+    .reason{
+      margin:0;
+      color: var(--text2);
+      line-height:1.5;
+      font-size: 13px;
+      word-break: break-word;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+    }
+    .chip{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+    }
+    .chip--slate{ background: rgba(255,255,255,.06); }
+    .chip--red{ background: rgba(255,70,70,.16); border-color: rgba(255,70,70,.24); }
+    .chip--gold{ background: rgba(255,204,102,.18); border-color: rgba(255,204,102,.28); }
+    .chip--green{ background: rgba(52,199,89,.16); border-color: rgba(52,199,89,.24); }
+    .chip--blue{ background: rgba(70,140,255,.16); border-color: rgba(70,140,255,.24); }
+    .chip--purple{ background: rgba(175,82,222,.16); border-color: rgba(175,82,222,.24); }
+
+    .wish{
+      margin:0;
+      color: var(--text2);
+      line-height:1.55;
+      font-size: 13px;
+      word-break: break-word;
+    }
+
+    .foot{
+      padding: 12px 18px 18px;
+      color: var(--muted);
+      font-size: 12px;
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    /* 右侧：更“网页化”的阅读区 */
+    .reader{
+      padding: 18px;
+    }
+
+    .reader h2{
+      margin: 2px 0 6px;
+      font-size: 22px;
+      letter-spacing: .4px;
+    }
+    .reader .sub{
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .readerGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 980px){
+      .readerGrid{ grid-template-columns: 1fr; }
+    }
+
+    .wide{ grid-column: 1 / -1; }
+
+    /* 状态条 */
+    .status{
+      margin: 12px 0 0;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,.18);
+      background: rgba(255,255,255,.04);
+      color: var(--text2);
+      font-size: 12px;
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap: wrap;
+    }
+    .spinner{
+      width: 14px; height: 14px;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,.25);
+      border-top-color: rgba(255,255,255,.85);
+      animation: spin 1s linear infinite;
+      flex: 0 0 auto;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .is-hidden{ display:none !important; }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="titlewrap">
+          <h1 data-bind="coverTitle">举杯团圆·新春假期</h1>
+          <p>PC 友好版 · 打开链接即可分享</p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn" id="btnCopy">复制链接</button>
+        <button class="btn" id="btnReload">重试加载</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="grid">
+      <!-- 左：海报卡（更像“成品”） -->
+      <section class="panel poster" aria-label="海报">
+        <div class="posterHeader">
+          <div>
+            <div class="kicker">新春假期海报</div>
+            <div class="mainTitle" data-bind="coverTitle">举杯团圆·新春假期</div>
+          </div>
+          <div class="stamp" aria-hidden="true">福</div>
+        </div>
+
+        <div class="posterBody">
+          <div class="heroLine">
+            <div class="nickname">—— 送给 <span data-bind="nickname">爱记录的你</span></div>
+            <div class="generatedAt" data-bind="generatedAtLabel">生成于 2025-12-26</div>
+          </div>
+
+          <div class="cards">
+            <section class="card" aria-label="假期活动">
+              <h3><span>假期活动</span><span class="tag">HIGHLIGHTS</span></h3>
+              <ul class="acts" data-bind="activities">
+                <li class="act"><span class="dot" aria-hidden="true"></span><p>年夜饭后和家人举杯合影，把团圆笑脸定格成全家福</p></li>
+              </ul>
+            </section>
+
+            <section aria-label="过年人格" class="card" id="personaCard">
+              <h3><span>过年人格</span><span class="tag">MBTI</span></h3>
+              <div class="persona">
+                <div class="mbti mbti--slate" data-bind="mbti">NA</div>
+                <p class="reason" data-bind="reason">
+                  （如果你看到这段，说明数据还在加载中。）
+                </p>
+              </div>
+            </section>
+
+            <section aria-label="过年关键词" class="card">
+              <h3><span>过年关键词</span><span class="tag">TOP 3</span></h3>
+              <div class="chips" data-bind="keywords">
+                <span class="chip chip--slate">团圆饭</span>
+                <span class="chip chip--slate">举杯</span>
+                <span class="chip chip--slate">全家福</span>
+              </div>
+            </section>
+
+            <section aria-label="新年寄语" class="card">
+              <h3><span>新年寄语</span><span class="tag">WISH</span></h3>
+              <p class="wish" data-bind="wish">
+                愿你把这次举杯的热闹与安心都收进口袋里，新的一年家常有光、心里有底，想见的人常相见。
+              </p>
+            </section>
+          </div>
+        </div>
+
+        <div class="foot">
+          <span data-bind="signature">AI 春节报告 · 仅供分享</span>
+          <span>链接打开后如延迟，请稍等 30～60 秒再刷新</span>
+        </div>
+      </section>
+
+      <!-- 右：阅读区（更适合 PC） -->
+      <section class="panel reader" aria-label="详情">
+        <h2>春节报告 · 详情阅读</h2>
+        <p class="sub">
+          右侧适合电脑阅读和截图分享；左侧为“海报成品”展示。
+          若 GitHub Pages 有延迟，本页会自动重试，直到成功或超时。
+        </p>
+
+        <div class="readerGrid">
+          <section class="card wide" aria-label="标题与对象">
+            <h3><span>这份海报属于</span><span class="tag">TO</span></h3>
+            <p class="wish" style="margin-top:0">
+              <b data-bind="nickname">爱记录的你</b> ·
+              <span style="color:var(--muted)">主题：</span><span data-bind="coverTitle">举杯团圆·新春假期</span>
+            </p>
+          </section>
+
+          <section class="card" aria-label="人格解读">
+            <h3><span>人格解读</span><span class="tag">MBTI</span></h3>
+            <div class="persona">
+              <div class="mbti mbti--slate" data-bind="mbti">NA</div>
+              <p class="reason" data-bind="reason">（加载中…）</p>
+            </div>
+          </section>
+
+          <section class="card" aria-label="关键词">
+            <h3><span>关键词</span><span class="tag">TOP 3</span></h3>
+            <div class="chips" data-bind="keywords"></div>
+          </section>
+
+          <section class="card wide" aria-label="活动亮点">
+            <h3><span>活动亮点</span><span class="tag">HIGHLIGHTS</span></h3>
+            <ul class="acts" data-bind="activities"></ul>
+          </section>
+
+          <section class="card wide" aria-label="新年寄语">
+            <h3><span>新年寄语</span><span class="tag">WISH</span></h3>
+            <p class="wish" data-bind="wish"></p>
+          </section>
+
+          <section class="card wide" aria-label="署名">
+            <h3><span>署名与时间</span><span class="tag">META</span></h3>
+            <p class="wish" style="margin:0">
+              <span data-bind="signature">AI 春节报告 · 仅供分享</span>
+              <span style="margin:0 8px; opacity:.6">·</span>
+              <span data-bind="generatedAtLabel"></span>
+            </p>
+          </section>
+        </div>
+
+        <div class="status" id="statusBar">
+          <span style="display:flex;align-items:center;gap:10px;">
+            <span class="spinner" id="spinner"></span>
+            <span id="statusText">准备加载报告…</span>
+          </span>
+          <span id="statusHint" style="color:var(--muted)">如果 30～60 秒后仍失败，可点右上角“重试加载”。</span>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // -------------------------------
+    // 工具函数
+    // -------------------------------
+    const $ = (s) => document.querySelector(s);
+    const ALLOWED_TONES = new Set(["red","gold","green","blue","purple","slate"]);
+
+    function normalizeTone(tone){
+      const t = String(tone || "").trim().toLowerCase();
+      return ALLOWED_TONES.has(t) ? t : "slate";
+    }
+
+    function formatDateLabel(iso){
+      try{
+        const d = new Date(iso);
+        if (Number.isNaN(d.getTime())) return "";
+        const y = d.getFullYear();
+        const m = String(d.getMonth()+1).padStart(2,"0");
+        const day = String(d.getDate()).padStart(2,"0");
+        return `生成于 ${y}-${m}-${day}`;
+      }catch{ return ""; }
+    }
+
+    // ✅ 不要在数据为空时清掉占位文案（PC版体验更好）
+    function safeBindText(key, value){
+      const v = value == null ? "" : String(value);
+      if (!v.trim()) return;
+      document.querySelectorAll(`[data-bind="${key}"]`).forEach(el => {
+        el.textContent = v;
+      });
+    }
+
+    function renderActivities(list){
+      const targets = document.querySelectorAll('[data-bind="activities"]');
+      if (!targets.length) return;
+      if (!Array.isArray(list) || list.length === 0) return;
+
+      targets.forEach(el => {
+        el.innerHTML = "";
+        list.slice(0,3).forEach(t => {
+          const li = document.createElement("li");
+          li.className = "act";
+          const dot = document.createElement("span");
+          dot.className = "dot";
+          dot.setAttribute("aria-hidden", "true");
+          const p = document.createElement("p");
+          p.textContent = String(t ?? "");
+          li.append(dot, p);
+          el.appendChild(li);
+        });
+      });
+    }
+
+    function renderKeywords(list){
+      const targets = document.querySelectorAll('[data-bind="keywords"]');
+      if (!targets.length) return;
+      if (!Array.isArray(list) || list.length === 0) return;
+
+      targets.forEach(el => {
+        el.innerHTML = "";
+        list.slice(0,3).forEach(item => {
+          const text = typeof item === "string" ? item : (item?.text ?? "");
+          if (!String(text).trim()) return;
+          const tone = typeof item === "string" ? "slate" : normalizeTone(item?.tone);
+          const span = document.createElement("span");
+          span.className = `chip chip--${tone}`;
+          span.textContent = String(text ?? "");
+          el.appendChild(span);
+        });
+      });
+    }
+
+    function mbtiColorClass(mbti){
+      const m = String(mbti || "").trim().toUpperCase();
+      const green  = new Set(["ENFJ","ENFP","INFJ","INFP"]);
+      const purple = new Set(["ENTJ","ENTP","INTJ","INTP"]);
+      const yellow = new Set(["ESFP","ESTP","ISFP","ISTP"]);
+      const blue   = new Set(["ESFJ","ESTJ","ISFJ","ISTJ"]);
+      if (green.has(m))  return "mbti--green";
+      if (purple.has(m)) return "mbti--purple";
+      if (yellow.has(m)) return "mbti--yellow";
+      if (blue.has(m))   return "mbti--blue";
+      return "mbti--slate";
+    }
+
+    function renderMbti(mbti){
+      const card = document.getElementById("personaCard");
+      const els = document.querySelectorAll('[data-bind="mbti"]');
+      const m = String(mbti || "").trim().toUpperCase();
+
+      if (!m || m === "NA"){
+        if (card) card.classList.add("is-hidden");
+        return;
+      }
+      if (card) card.classList.remove("is-hidden");
+
+      els.forEach(el => {
+        el.textContent = m;
+        el.classList.remove("mbti--green","mbti--purple","mbti--yellow","mbti--blue","mbti--slate");
+        const cls = mbtiColorClass(m) || "mbti--slate";
+        el.classList.add(cls);
+      });
+    }
+
+    function render(data){
+      const r = data?.report || {};
+      const p = r.persona || {};
+
+      safeBindText("coverTitle", r.coverTitle);
+      safeBindText("nickname", r.nickname);
+      safeBindText("wish", r.wish);
+      safeBindText("reason", p.reason);
+      safeBindText("signature", r.signature || "AI 春节报告 · 仅供分享");
+      safeBindText("generatedAtLabel", formatDateLabel(data?.generatedAt));
+
+      renderActivities(r.activities);
+      renderKeywords(r.keywords);
+      renderMbti(p.mbti);
+    }
+
+    function getId(){
+      const qs = new URLSearchParams(location.search);
+      const id = qs.get("id");
+      return id ? id.trim() : "";
+    }
+
+    function isExpired(generatedAtIso){
+      try{
+        const t = new Date(generatedAtIso).getTime();
+        if (Number.isNaN(t)) return false;
+        const ageMs = Date.now() - t;
+        return ageMs > 7 * 24 * 60 * 60 * 1000;
+      }catch{ return false; }
+    }
+
+    // -------------------------------
+    // 稳定加载：轮询/重试（适配 30~60 秒延迟）
+    // -------------------------------
+    const statusText = $("#statusText");
+    const spinner = $("#spinner");
+    const statusBar = $("#statusBar");
+
+    function setStatus(msg, loading=true){
+      if (statusText) statusText.textContent = msg;
+      if (spinner) spinner.style.display = loading ? "inline-block" : "none";
+      if (statusBar) statusBar.style.opacity = "1";
+    }
+
+    function stopStatus(msg){
+      setStatus(msg, false);
+      if (statusBar) statusBar.style.opacity = ".85";
+    }
+
+    async function fetchJsonWithPolling(urlObj, maxWaitMs = 70_000){
+      const start = Date.now();
+      let attempt = 0;
+      let lastErr = null;
+
+      while (Date.now() - start < maxWaitMs){
+        attempt++;
+
+        // cache bust：每次请求都换 _ts，最大化绕过缓存
+        urlObj.searchParams.set("_ts", Date.now().toString());
+
+        const url = urlObj.toString();
+        setStatus(`正在加载报告…（第 ${attempt} 次尝试）`, true);
+
+        try{
+          const res = await fetch(url, {
+            cache: "no-store",
+            headers: { "Cache-Control": "no-store" }
+          });
+
+          const raw0 = await res.text();
+          // ✅ 去 BOM，避免 JSON.parse 偶发失败
+          const raw = raw0.replace(/^\uFEFF/, "");
+
+          if (!res.ok){
+            throw new Error(`HTTP ${res.status}`);
+          }
+
+          // 直接 parse，别用 startsWith("{") 误判
+          const data = JSON.parse(raw);
+          return data;
+        }catch(e){
+          lastErr = e;
+          // 轮询间隔：2s -> 3s -> 5s -> 8s -> 8s...
+          const wait = Math.min(8000, [2000,3000,5000,8000][Math.min(attempt-1,3)]);
+          setStatus(`暂未就绪，${Math.round(wait/1000)} 秒后自动重试…（${String(e)})`, true);
+          await new Promise(r => setTimeout(r, wait));
+        }
+      }
+
+      throw lastErr || new Error("timeout");
+    }
+
+    async function loadOnce(){
+      const id = getId();
+      if (!id){
+        stopStatus("缺少参数：?id=xxx");
+        return;
+      }
+
+      const safeId = id.replace(/\.json$/i, "");
+      // 页面在 /p/，reports 在 /reports/，所以用 ../reports
+      const urlObj = new URL(`../reports/${encodeURIComponent(safeId)}.json`, location.href);
+
+      try{
+        const data = await fetchJsonWithPolling(urlObj, 70_000);
+
+        if (isExpired(data?.generatedAt)){
+          stopStatus("链接已过期（7 天），请重新生成。");
+          return;
+        }
+
+        render(data);
+        stopStatus("加载成功 ✅（如内容更新延迟，可稍后刷新）");
+      }catch(e){
+        console.error("加载失败：", e);
+        stopStatus("加载失败：请稍后刷新或点击“重试加载”（控制台可查看详细错误）");
+      }
+    }
+
+    // -------------------------------
+    // 顶部按钮
+    // -------------------------------
+    $("#btnCopy")?.addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(location.href);
+        setStatus("已复制链接 ✅", false);
+        setTimeout(()=>stopStatus("加载成功 ✅（如内容更新延迟，可稍后刷新）"), 1200);
+      }catch{
+        // 兼容降级
+        const input = document.createElement("input");
+        input.value = location.href;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        input.remove();
+        setStatus("已复制链接 ✅", false);
+        setTimeout(()=>stopStatus("加载成功 ✅（如内容更新延迟，可稍后刷新）"), 1200);
+      }
+    });
+
+    $("#btnReload")?.addEventListener("click", () => {
+      loadOnce();
+    });
+
+    // DOM ready
+    if (document.readyState === "loading"){
+      document.addEventListener("DOMContentLoaded", loadOnce);
+    }else{
+      loadOnce();
+    }
+  </script>
+</body>
+</html>
