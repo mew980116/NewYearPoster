@@ -552,36 +552,46 @@
     }catch{ return false; }
   }
 
-  async function fetchJsonWithRetry(url, times = 3){
-    let lastErr;
-    for (let i = 0; i < times; i++){
+  
+async function fetchJsonWithRetry(url, times = 3){
+  let lastErr;
+
+  for (let i = 0; i < times; i++){
+    try{
+      const res = await fetch(url, {
+        cache: "no-store",
+        headers: { "Cache-Control": "no-store" }
+      });
+
+      const ct = (res.headers.get("content-type") || "").toLowerCase();
+      const raw0 = await res.text();
+
+      // ✅ 去掉 UTF-8 BOM（\uFEFF）并做轻微清理
+      const raw = raw0.replace(/^\uFEFF/, "");
+
+      console.log("[fetch]", res.status, res.url, ct);
+      console.log("[body head]", raw.slice(0, 120));
+
+      if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+
+      // ✅ 不做 startsWith('{') 的硬判断，直接 parse
       try{
-        const res = await fetch(url, {
-          cache: "no-store",
-          headers: { "Cache-Control": "no-store" }
-        });
-
-        const ct = (res.headers.get("content-type") || "").toLowerCase();
-        const raw = await res.text();
-
-        console.log("[fetch]", res.status, res.url, ct);
-        console.log("[body head]", raw.slice(0, 120));
-
-        if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
-
-        // 防止偶发拿到 HTML（例如缓存/错误页/重写）
-        if (!raw.trim().startsWith("{")){
-          throw new Error("返回内容不是 JSON（可能是HTML/缓存/错误页）");
-        }
-
         return JSON.parse(raw);
-      }catch(e){
-        lastErr = e;
-        await new Promise(r => setTimeout(r, 250 * (2 ** i)));
+      }catch(parseErr){
+        // 如果真拿到 HTML/错误页，这里会给你更准的证据
+        throw new Error(
+          `JSON解析失败：${parseErr}. 返回开头：${raw.slice(0, 80)}`
+        );
       }
+    }catch(e){
+      lastErr = e;
+      await new Promise(r => setTimeout(r, 250 * (2 ** i)));
     }
-    throw lastErr;
   }
+
+  throw lastErr;
+}
+
 
   // ========= 初始化 =========
   async function init(){
