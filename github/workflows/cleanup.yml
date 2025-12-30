@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Remove reports older than 7 days
+      - name: Remove reports older than 30 days
         run: |
           node -e "
           const fs=require('fs');
@@ -23,7 +23,7 @@ jobs:
           const dir='reports';
           if(!fs.existsSync(dir)) process.exit(0);
           const now=Date.now();
-          const maxAge=7*24*60*60*1000;
+          const maxAge=30*24*60*60*1000;
           const files=fs.readdirSync(dir).filter(f=>f.endsWith('.json'));
           let removed=0;
           for(const f of files){
